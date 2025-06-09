@@ -1,0 +1,37 @@
+import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import {Link} from "react-router";
+
+const LoginForm = () => {
+  return (
+      <section className="container flex flex-col items-center justify-center pt-15 h-[75vh] mx-auto mt-10">
+        <h1 className="text-5xl mb-6 font-semibold bg-gradient-to-br from-cyan-600 to-blue-700 inline-block text-transparent bg-clip-text">Welcome Back!</h1>
+        <hr className="w-[75%] mb-6 border-t border-gray-300" />
+        <form className="flex min-w-xs max-w-sm flex-col gap-4">
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="email1">Your email:</Label>
+            </div>
+            <TextInput id="email1" type="email" placeholder="name@flowbite.com" required />
+          </div>
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="password1">Your password:</Label>
+            </div>
+            <TextInput id="password1" type="password" required />
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox id="remember" />
+            <Label htmlFor="remember">Remember me</Label>
+          </div>
+          <Button type="submit">Log In</Button>
+        </form>
+        <div className="flex flex-col items-center min-w-xs max-w-sm mt-6">
+          <p className="text-sm">Don't have an account?</p>
+          <Button color="dark" className="w-full mt-1" ><Link className="block w-full" to="/register">Sign In</Link></Button>
+        </div>
+      </section>
+
+  );
+}
+
+export default LoginForm;

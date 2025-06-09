@@ -52,3 +52,7 @@ export default tseslint.config({
   },
 })
 ```
+
+## References
+
+Favicon, Calendar Icon: https://freesvgicons.com/search?q=calendar

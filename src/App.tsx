@@ -1,17 +1,50 @@
 import './App.css'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import Home from "./components/Home.tsx";
+
+// Disable Dark mode for a seamless UI
+import { ThemeConfig } from "flowbite-react";
+
+import {BrowserRouter, Route, Routes} from "react-router";
+import RouterLayoutBase from "./components/RouterLayoutBase.tsx";
+import RouterLayoutRegister from "./components/RouterLayoutRegister.tsx";
+import Home from "./pages/Home.tsx";
+import RegisterPage from "./pages/RegisterPage.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
+import AboutPage from "./pages/AboutPage.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
+import Footer from "./components/Footer.tsx";
 
 function App() {
 
   return (
     <>
-      <main className="bg-gray-300 h-screen ">
-        <Nav />
-        <Home />
-        <Footer />
-      </main>
+      <ThemeConfig dark={false} />
+      <BrowserRouter>
+
+        <Routes>
+          <Route element={<RouterLayoutBase />} >
+            <Route index element={<Home footer={ <Footer/> }/>} />
+            <Route path="/about" element={<AboutPage footer={ <Footer/> }/>} />
+            <Route path="/contact" element={<ContactPage footer={ <Footer/> }/>} />
+          </Route>
+
+          <Route element={<RouterLayoutRegister />} >
+            <Route path="/register" element={<RegisterPage/>} />
+            <Route path="/login" element={<LoginPage/>} />
+          </Route>
+
+        </Routes>
+
+      </BrowserRouter>
+
+
+      {/*  <Nav />*/}
+      {/*  <RegisterNav />*/}
+      {/*<ReservationForm />*/}
+      {/*/!*<LoginForm />*!/*/}
+      {/*  /!*<RegisterForm />*!/*/}
+      {/*  /!*<Home />*!/*/}
+      {/*  /!*<Footer />*!/*/}
+      {/*<RegisterFooter />*/}
 
     </>
   )

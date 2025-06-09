@@ -1,1 +1,11 @@
 @import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+/*.active {*/
+/*    color: #f98080;*/
+/*}*/
+
+a, button:hover {
+    cursor: pointer;
+}
