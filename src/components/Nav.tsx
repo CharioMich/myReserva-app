@@ -7,7 +7,8 @@ export default function Nav() {
     <nav className="fixed top-0 start-0 z-50 w-screen ">
       <Navbar className="bg-linear-to-r from-gray-700 to-gray-800 text-white"  >
         <NavbarBrand href="/">
-          <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="App Logo" />
+          {/*<img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="App Logo" />*/}
+          <img src="/calendar.png" className="mr-2 h-6 sm:h-9" alt="App Logo" />
           <span className="self-center whitespace-nowrap text-white text-xl font-semibold">myReserva</span>
         </NavbarBrand>
         <div className="flex md:order-2">
@@ -28,7 +29,7 @@ export default function Nav() {
         <NavbarCollapse>
           <CustomNavbarLink to={"/"} text={"Home"} />
           <CustomNavbarLink to={"/about"} text={"About"} />
-          {/*<CustomNavbarLink to={"/services"} text={"Services"} />*/}
+          <CustomNavbarLink to={"/new-reservation"} text={"Util"} />
           <CustomNavbarLink to={"/contact"} text={"Contact"} />
           {/*<NavbarLink className="text-white hover:text-gray-700">*/}
           {/*  <Link to="/contact">Contact</Link>*/}

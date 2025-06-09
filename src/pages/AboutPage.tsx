@@ -1,6 +1,6 @@
-import type { footerProps } from "../interfaces/FooterProps.ts";
+import type { FooterProps } from "../types/types.ts";
 
-const AboutPage = ({footer}: footerProps) => {
+const AboutPage = ({footer}: FooterProps) => {
   return (
     <>
       <section className="flex flex-col p-5 space-y-6 justify-center items-center bg-gradient-to-r from-emerald-500 to-sky-100 min-h-[100vh]">

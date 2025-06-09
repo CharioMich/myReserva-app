@@ -12,6 +12,8 @@ import LoginPage from "./pages/LoginPage.tsx";
 import AboutPage from "./pages/AboutPage.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import Footer from "./components/Footer.tsx";
+import ReservationPage from "./pages/ReservationPage.tsx";
+import RegisterFooter from "./components/RegisterFooter.tsx";
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
             <Route index element={<Home footer={ <Footer/> }/>} />
             <Route path="/about" element={<AboutPage footer={ <Footer/> }/>} />
             <Route path="/contact" element={<ContactPage footer={ <Footer/> }/>} />
+            <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />
           </Route>
 
           <Route element={<RouterLayoutRegister />} >

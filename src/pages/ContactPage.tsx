@@ -1,6 +1,6 @@
-import type { footerProps } from "../interfaces/FooterProps.ts";
+import type { FooterProps } from "../types/types.ts";
 
-const ContactPage = ({footer}: footerProps) => {
+const ContactPage = ({footer}: FooterProps) => {
   return (
     <>
       <section className="flex flex-col p-5 space-y-6 justify-center items-center bg-gradient-to-r from-pink-400 to-orange-100 min-h-[100vh]">

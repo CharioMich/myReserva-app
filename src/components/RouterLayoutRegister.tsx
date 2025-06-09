@@ -5,9 +5,13 @@ import {Outlet} from "react-router";
 const RouterLayoutRegister = () => {
   return (
     <>
-      <RegisterNav />
-        <Outlet />
-      <RegisterFooter />
+      <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
+        <RegisterNav />
+        <main className="flex-grow">
+          <Outlet />
+        </main>
+        <RegisterFooter />
+      </div>
     </>
   )
 }

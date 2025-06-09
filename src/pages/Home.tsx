@@ -1,7 +1,7 @@
 import {Link} from "react-router";
-import type { footerProps } from "../interfaces/FooterProps.ts";
+import type { FooterProps } from "../types/types.ts";
 
-const Home = ( {footer}: footerProps ) => (
+const Home = ( {footer}: FooterProps ) => (
   <>
     <section className="flex flex-col p-5 space-y-4 justify-center items-center bg-red-400 min-h-[100vh] ">
       <h1 className="mt-16 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">

@@ -1,8 +1,13 @@
 import ReservationForm from "../components/ReservationForm.tsx";
+import type { FooterProps } from "../types/types.ts";
 
-const ReservationPage = () => {
+const ReservationPage = ({footer}: FooterProps) => {
   return (
-    <ReservationForm />
+    <>
+      <ReservationForm />
+      {footer}
+    </>
+
   )
 }
 

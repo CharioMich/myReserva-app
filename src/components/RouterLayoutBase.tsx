@@ -4,7 +4,7 @@ import Nav from "./Nav.tsx";
 
 const RouterLayoutBase = () => {
   return (
-    <div className="flex flex-col max-h-[100vh] min-h-[100vh]"> {/* pt-16 to avoid content hiding behind navbar */}
+    <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
       <Nav />
       <main className="flex-grow">
         <Outlet />
