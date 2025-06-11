@@ -1,5 +1,5 @@
 
-import { Label, Select, Textarea, Datepicker, Button } from "flowbite-react";
+import { Label, Textarea, Datepicker, Button } from "flowbite-react";
 import {useState} from "react";
 import type {ResTime} from "../types/types.ts";
 
@@ -12,17 +12,16 @@ const ReservationForm = () => {
   const AHEAD: number = 2;
   maxDate.setMonth(maxDate.getMonth() + AHEAD);
 
-  const [date, setDate] = useState<Date | undefined>();
+  const [date, setDate] = useState<Date | null>();
 
   const handleDateChange = (selectedDate: Date | null) => {
     if (selectedDate) {
       setDate(selectedDate);
-      console.log("Selected date:", date);
     }
   };
 
   // SET THE TIMEPICKER
-  const times: ResTime[] = [
+  const allTimes: ResTime[] = [
     { "id": 1, "active": false, "hours": "14:00" },
     { "id": 2, "active": false, "hours": "14:30" },
     { "id": 3, "active": false, "hours": "15:00" },
@@ -40,10 +39,26 @@ const ReservationForm = () => {
     { "id": 15, "active": false, "hours": "21:00" }
   ]
 
+  const getActualTimes = () => {
+    // return fetchedTimes;
+    return allTimes; // TODO: API call to get the reserved times from a DB else return times array
+  }
+
+  const [times, setTimes] = useState<ResTime[]>(getActualTimes);
+  const [selectedTime, setSelectedTime] = useState<string | null>();
+
+  const handleClick = (id: number, hours: string) => {
+    setSelectedTime(hours);
+    return setTimes(times.map(time =>
+      time.id === id
+        ? {...time, "active": true}
+        : {...time, "active": false}
+    ));
+  }
 
   return (
     <>
-      <section className="container flex flex-col items-center justify-center mx-auto">
+      <section className="container flex flex-col items-center justify-center pt-8 mx-auto">
         <h2 className="mt-10 text-gray-600 p-5">New Reservation</h2>
         <hr className="w-[70%] mb-6 border-t border-gray-300 " />
         <form className="flex flex-col gap-4">
@@ -55,18 +70,24 @@ const ReservationForm = () => {
                 onChange={handleDateChange}
                 minDate={today}
                 maxDate={maxDate} />
-              <div>
-                <span>
+              <div className="h-20 my-auto">
+                <p>
                   {date ? date.toLocaleDateString() : "Select date"}
-                </span>
+                </p>
+                <p>
+                  {selectedTime ? selectedTime : "Select time"}
+                </p>
               </div>
             </div>
             <div>
-              <ul className="grid grid-cols-3 gap-2 list-none p-0">
+              <Label htmlFor="time">Select time:</Label>
+              <ul id="time" className="grid grid-cols-3 gap-2 list-none mt-2">
                 {times.map((time: ResTime) => (
                   <li key={time.id}>
-                    <Button disabled={time.active}>
-                      {time.hours}
+                    <Button
+                      disabled={time.active}
+                      onClick={() => handleClick(time.id, time.hours)}
+                    >{time.hours}
                     </Button>
                   </li>
                 ))}

@@ -1,6 +1,12 @@
 import type { FooterProps } from "../types/types.ts";
+import {useEffect} from "react";
 
 const ContactPage = ({footer}: FooterProps) => {
+
+  useEffect(() => {
+    document.title = "myReserva | Contact";
+  }, []);
+
   return (
     <>
       <section className="flex flex-col p-5 space-y-6 justify-center items-center bg-gradient-to-r from-pink-400 to-orange-100 min-h-[100vh]">
