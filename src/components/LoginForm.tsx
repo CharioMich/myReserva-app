@@ -1,7 +1,15 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import {Link} from "react-router";
+import {useEffect, useRef} from "react";
 
 const LoginForm = () => {
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  })
+
   return (
       <section className="container flex flex-col items-center justify-center pt-9 mx-auto mt-10">
         <h1 className="text-5xl py-6 font-semibold bg-gradient-to-br from-cyan-600 to-blue-700 inline-block text-transparent bg-clip-text">Welcome Back!</h1>
@@ -11,7 +19,13 @@ const LoginForm = () => {
             <div className="mb-2 block">
               <Label htmlFor="email1">Your email:</Label>
             </div>
-            <TextInput id="email1" type="email" placeholder="name@myreserva.com" required />
+            <TextInput
+              ref={inputRef}
+              id="email1"
+              type="email"
+              placeholder="name@myreserva.com"
+              required
+            />
           </div>
           <div>
             <div className="mb-2 block">

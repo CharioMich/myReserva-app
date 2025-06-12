@@ -1,14 +1,20 @@
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import { Link } from "react-router";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 const RegisterForm = () => {
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [checked, setChecked] = useState(true);
 
   const handleCheck = () => {
     setChecked(!checked);
   }
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  })
 
   return (
     <section className="container flex flex-col items-center justify-center pt-15 mx-auto mt-10">
@@ -17,7 +23,14 @@ const RegisterForm = () => {
           <div className="mb-2 block">
             <Label htmlFor="email2">Your email:</Label>
           </div>
-          <TextInput id="email2" type="email" placeholder="name@myreserva.com" required shadow />
+          <TextInput
+            ref={inputRef}
+            id="email2"
+            type="email"
+            placeholder="name@myreserva.com"
+            required
+            shadow
+          />
         </div>
         <div>
           <div className="mb-2 block">
