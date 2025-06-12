@@ -21,22 +21,23 @@ const ReservationForm = () => {
   };
 
   // SET THE TIMEPICKER
+  // This Data will be fetched from the babckend
   const allTimes: ResTime[] = [
-    { "id": 1, "active": false, "hours": "14:00" },
-    { "id": 2, "active": false, "hours": "14:30" },
-    { "id": 3, "active": false, "hours": "15:00" },
-    { "id": 4, "active": false, "hours": "15:30" },
-    { "id": 5, "active": false, "hours": "16:00" },
-    { "id": 6, "active": false, "hours": "16:30" },
-    { "id": 7, "active": false, "hours": "17:00" },
-    { "id": 8, "active": false, "hours": "17:30" },
-    { "id": 9, "active": false, "hours": "18:00" },
-    { "id": 10, "active": false, "hours": "18:30" },
-    { "id": 11, "active": false, "hours": "19:00" },
-    { "id": 12, "active": false, "hours": "19:30" },
-    { "id": 13, "active": false, "hours": "20:00" },
-    { "id": 14, "active": false, "hours": "20:30" },
-    { "id": 15, "active": false, "hours": "21:00" }
+    { "id": 1, "active": false, "hours": "14:00", "checked": false },
+    { "id": 2, "active": false, "hours": "14:30", "checked": false },
+    { "id": 3, "active": true, "hours": "15:00", "checked": false },
+    { "id": 4, "active": false, "hours": "15:30", "checked": false },
+    { "id": 5, "active": false, "hours": "16:00", "checked": false },
+    { "id": 6, "active": false, "hours": "16:30", "checked": false },
+    { "id": 7, "active": false, "hours": "17:00", "checked": false },
+    { "id": 8, "active": true, "hours": "17:30", "checked": false },
+    { "id": 9, "active": false, "hours": "18:00", "checked": false },
+    { "id": 10, "active": false, "hours": "18:30", "checked": false },
+    { "id": 11, "active": false, "hours": "19:00", "checked": false },
+    { "id": 12, "active": false, "hours": "19:30", "checked": false },
+    { "id": 13, "active": false, "hours": "20:00", "checked": false },
+    { "id": 14, "active": false, "hours": "20:30", "checked": false },
+    { "id": 15, "active": false, "hours": "21:00", "checked": false }
   ]
 
   const getActualTimes = () => {
@@ -51,15 +52,22 @@ const ReservationForm = () => {
     setSelectedTime(hours);
     return setTimes(times.map(time =>
       time.id === id
-        ? {...time, "active": true}
-        : {...time, "active": false}
+        ? {...time, "checked": true}
+        : {...time, "checked": false}
     ));
-  }
+  };
+
+  const fullDate = date?.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
 
   return (
     <>
       <section className="container flex flex-col items-center justify-center pt-8 mx-auto">
-        <h2 className="mt-10 text-gray-600 p-5">New Reservation</h2>
+        <h2 className="mt-8 text-gray-600 p-5">New Reservation</h2>
         <hr className="w-[70%] mb-6 border-t border-gray-300 " />
         <form className="flex flex-col gap-4">
           <div className="flex flex-row justify-around min-w-xl">
@@ -70,14 +78,16 @@ const ReservationForm = () => {
                 onChange={handleDateChange}
                 minDate={today}
                 maxDate={maxDate} />
-              <div className="h-20 my-auto">
-                <p>
-                  {date ? date.toLocaleDateString() : "Select date"}
-                </p>
-                <p>
-                  {selectedTime ? selectedTime : "Select time"}
-                </p>
-              </div>
+              {date && selectedTime && (
+                <div className="flex flex-col items-center my-auto py-10 rounded-2xl space-y-2 bg-gradient-to-br from-pink-500 to-orange-500 shadow-2xl shadow-blue-300">
+                  <p className="text-white">
+                    <strong>{date ? fullDate : "Select date"}</strong>
+                  </p>
+                  <p className="text-white">
+                    at: <strong>{selectedTime ? selectedTime : "Select time"}</strong>
+                  </p>
+                </div>
+              )}
             </div>
             <div>
               <Label htmlFor="time">Select time:</Label>
@@ -87,6 +97,7 @@ const ReservationForm = () => {
                     <Button
                       disabled={time.active}
                       onClick={() => handleClick(time.id, time.hours)}
+                      className={time.checked ? "bg-blue-900 hover:bg-blue-900 " : ""}
                     >{time.hours}
                     </Button>
                   </li>

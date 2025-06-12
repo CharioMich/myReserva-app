@@ -1,13 +1,12 @@
-import { Button, Navbar, NavbarBrand, NavbarCollapse, NavbarToggle } from "flowbite-react";
+import {Button, Navbar, NavbarLink, NavbarBrand, NavbarCollapse, NavbarToggle} from "flowbite-react";
 import {Link} from "react-router";
-import CustomNavbarLink from "./CustomNavbarLink.tsx";
 
 export default function Nav() {
+
   return (
     <nav className="fixed top-0 start-0 z-50 w-screen ">
-      <Navbar className="bg-linear-to-r from-gray-700 to-gray-800 text-white"  >
+      <Navbar menuOpen={false} className="bg-linear-to-r from-gray-700 to-gray-800 text-white"  >
         <NavbarBrand href="/">
-          {/*<img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="App Logo" />*/}
           <img src="/calendar.png" className="mr-2 h-6 sm:h-9" alt="App Logo" />
           <span className="self-center whitespace-nowrap text-white text-xl font-semibold">myReserva</span>
         </NavbarBrand>
@@ -27,13 +26,29 @@ export default function Nav() {
           <NavbarToggle />
         </div>
         <NavbarCollapse>
-          <CustomNavbarLink to={"/"} text={"Home"} />
-          <CustomNavbarLink to={"/about"} text={"About"} />
-          <CustomNavbarLink to={"/new-reservation"} text={"Util"} />
-          <CustomNavbarLink to={"/contact"} text={"Contact"} />
-          {/*<NavbarLink className="text-white hover:text-gray-700">*/}
-          {/*  <Link to="/contact">Contact</Link>*/}
-          {/*</NavbarLink>*/}
+          {/*<Link*/}
+          {/*  to="/contact"*/}
+          {/*>Contact</Link>*/}
+          <NavbarLink
+            href="/"
+            className="text-white hover:text-gray-700"
+          >Home
+          </NavbarLink>
+          <NavbarLink
+            href="/about"
+            className="text-white hover:text-gray-700"
+          >About
+          </NavbarLink>
+          <NavbarLink
+            href="/new-reservation"
+            className="text-white hover:text-gray-700"
+          >Util
+          </NavbarLink>
+          <NavbarLink
+            href="/contact"
+            className="text-white hover:text-gray-700"
+          >Contact
+          </NavbarLink>
         </NavbarCollapse>
       </Navbar>
     </nav>

@@ -7,4 +7,5 @@ export type ResTime = {
   id: number;
   active: boolean;
   hours: string;
+  checked: boolean;
 }
