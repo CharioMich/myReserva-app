@@ -5,7 +5,7 @@ export interface FooterProps {
 
 export type ResTime = {
   id: number;
-  active: boolean;
+  available: boolean;
   hours: string;
   checked: boolean;
 }

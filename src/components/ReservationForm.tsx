@@ -21,23 +21,23 @@ const ReservationForm = () => {
   };
 
   // SET THE TIMEPICKER
-  // This Data will be fetched from the babckend
+  // This Data will be fetched from the backend
   const allTimes: ResTime[] = [
-    { "id": 1, "active": false, "hours": "14:00", "checked": false },
-    { "id": 2, "active": false, "hours": "14:30", "checked": false },
-    { "id": 3, "active": true, "hours": "15:00", "checked": false },
-    { "id": 4, "active": false, "hours": "15:30", "checked": false },
-    { "id": 5, "active": false, "hours": "16:00", "checked": false },
-    { "id": 6, "active": false, "hours": "16:30", "checked": false },
-    { "id": 7, "active": false, "hours": "17:00", "checked": false },
-    { "id": 8, "active": true, "hours": "17:30", "checked": false },
-    { "id": 9, "active": false, "hours": "18:00", "checked": false },
-    { "id": 10, "active": false, "hours": "18:30", "checked": false },
-    { "id": 11, "active": false, "hours": "19:00", "checked": false },
-    { "id": 12, "active": false, "hours": "19:30", "checked": false },
-    { "id": 13, "active": false, "hours": "20:00", "checked": false },
-    { "id": 14, "active": false, "hours": "20:30", "checked": false },
-    { "id": 15, "active": false, "hours": "21:00", "checked": false }
+    { "id": 1, "available": false, "hours": "14:00", "checked": false },
+    { "id": 2, "available": false, "hours": "14:30", "checked": false },
+    { "id": 3, "available": true, "hours": "15:00", "checked": false },
+    { "id": 4, "available": false, "hours": "15:30", "checked": false },
+    { "id": 5, "available": false, "hours": "16:00", "checked": false },
+    { "id": 6, "available": false, "hours": "16:30", "checked": false },
+    { "id": 7, "available": false, "hours": "17:00", "checked": false },
+    { "id": 8, "available": true, "hours": "17:30", "checked": false },
+    { "id": 9, "available": false, "hours": "18:00", "checked": false },
+    { "id": 10, "available": false, "hours": "18:30", "checked": false },
+    { "id": 11, "available": false, "hours": "19:00", "checked": false },
+    { "id": 12, "available": false, "hours": "19:30", "checked": false },
+    { "id": 13, "available": false, "hours": "20:00", "checked": false },
+    { "id": 14, "available": false, "hours": "20:30", "checked": false },
+    { "id": 15, "available": false, "hours": "21:00", "checked": false }
   ]
 
   const getActualTimes = () => {
@@ -80,11 +80,11 @@ const ReservationForm = () => {
                 maxDate={maxDate} />
               {date && selectedTime && (
                 <div className="flex flex-col items-center my-auto py-10 rounded-2xl space-y-2 bg-gradient-to-br from-pink-500 to-orange-500 shadow-2xl shadow-blue-300">
-                  <p className="text-white">
-                    <strong>{date ? fullDate : "Select date"}</strong>
+                  <p>
+                    <strong className="text-white font-extrabold">{date ? fullDate : "Select date"}</strong>
                   </p>
                   <p className="text-white">
-                    at: <strong>{selectedTime ? selectedTime : "Select time"}</strong>
+                    at: <strong className="font-extrabold">{selectedTime ? selectedTime : "Select time"}</strong>
                   </p>
                 </div>
               )}
@@ -95,7 +95,7 @@ const ReservationForm = () => {
                 {times.map((time: ResTime) => (
                   <li key={time.id}>
                     <Button
-                      disabled={time.active}
+                      disabled={time.available}
                       onClick={() => handleClick(time.id, time.hours)}
                       className={time.checked ? "bg-blue-900 hover:bg-blue-900 " : ""}
                     >{time.hours}
@@ -103,9 +103,11 @@ const ReservationForm = () => {
                   </li>
                 ))}
               </ul>
+              <div className="flex flex-col mt-3 items-center">
+                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-600"></div><span>Available time</span></div>
+                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-300"></div><span>Reserved time</span></div>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-row max-w-md">
           </div>
           <div className="">
             <div className="mb-2 block">
@@ -113,7 +115,7 @@ const ReservationForm = () => {
             </div>
             <Textarea id="comment" placeholder="Leave a comment..." rows={4}/>
           </div>
-          <Button type="submit">Make Reservation</Button>
+          <Button type="submit">Confirm Reservation</Button>
         </form>
       </section>
     </>

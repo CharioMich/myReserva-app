@@ -1,36 +1,47 @@
-import {Button, Navbar, NavbarLink, NavbarBrand, NavbarCollapse, NavbarToggle} from "flowbite-react";
-import {Link} from "react-router";
+import {
+  Avatar,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  Navbar,
+  NavbarBrand,
+  NavbarCollapse,
+  NavbarLink,
+  NavbarToggle,
+} from "flowbite-react";
+// import {Link} from "react-router";
 
-export default function Nav() {
+export default function NavLoggedIn() {
 
   return (
     <nav className="fixed top-0 start-0 z-50 w-screen ">
       <Navbar className="bg-linear-to-r from-gray-700 to-gray-800 text-white"  >
-        <NavbarBrand href="/">
+        <NavbarBrand href="/dashboard">
           <img src="/calendar.png" className="mr-2 h-6 sm:h-9" alt="App Logo" />
           <span className="self-center whitespace-nowrap text-white text-xl font-semibold">myReserva</span>
         </NavbarBrand>
-        <div className="flex md:order-2">
-          <Button
-            as={Link}
-            to="/login"
-            className="mr-2 hover:cursor-pointer" color="alternative" pill>
-            Log In
-          </Button>
-          <Button
-            as={Link}
-            to="/register"
-            className="hover:cursor-pointer mr-2 bg-gradient-to-br from-pink-500 to-orange-400 text-white hover:bg-gradient-to-bl focus:ring-pink-200 dark:focus:ring-pink-800">
-            Get Started
-          </Button>
+        <div className="flex md:order-2 space-x-2">
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+            }
+          >
+            <DropdownHeader>
+              <span className="block text-sm">Johnny Doe</span>
+              <span className="block truncate text-sm font-medium">name@myReserva.com</span>
+            </DropdownHeader>
+            <DropdownItem>Dashboard</DropdownItem>
+            <DropdownDivider />
+            <DropdownItem className="font-semibold text-red-400 hover:text-red-500">Sign out</DropdownItem>
+          </Dropdown>
           <NavbarToggle />
         </div>
         <NavbarCollapse>
-          {/*<Link*/}
-          {/*  to="/contact"*/}
-          {/*>Contact</Link>*/}
           <NavbarLink
-            href="/"
+            href="/dashboard"
             className="text-white hover:text-gray-700"
           >Home
           </NavbarLink>
@@ -50,13 +61,12 @@ export default function Nav() {
           >Util
           </NavbarLink>
           <NavbarLink
-            href="/admin-dashboard"
+            href="/dashboard"
             className="text-white hover:text-gray-700"
           >Util2
           </NavbarLink>
         </NavbarCollapse>
       </Navbar>
     </nav>
-
   );
 }

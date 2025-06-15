@@ -15,6 +15,8 @@ import Footer from "./components/Footer.tsx";
 import ReservationPage from "./pages/ReservationPage.tsx";
 import RegisterFooter from "./components/RegisterFooter.tsx";
 import NotFoundPage from "./pages/NotFoundPage.tsx";
+import RouterLayoutLoggedIn from "./components/RouterLayoutLoggedIn.tsx";
+import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
 
 function App() {
 
@@ -28,12 +30,16 @@ function App() {
             <Route index element={<Home footer={ <Footer/> }/>} />
             <Route path="/about" element={<AboutPage footer={ <Footer/> }/>} />
             <Route path="/contact" element={<ContactPage footer={ <Footer/> }/>} />
-            <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />
           </Route>
 
           <Route element={<RouterLayoutRegister />} >
             <Route path="/register" element={<RegisterPage/>} />
             <Route path="/login" element={<LoginPage/>} />
+          </Route>
+
+          <Route element={<RouterLayoutLoggedIn />} >
+            <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />
+            <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

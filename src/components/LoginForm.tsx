@@ -12,7 +12,7 @@ const LoginForm = () => {
 
   return (
       <section className="container flex flex-col items-center justify-center pt-9 mx-auto mt-10">
-        <h1 className="text-5xl py-6 font-semibold bg-gradient-to-br from-cyan-600 to-blue-700 inline-block text-transparent bg-clip-text">Welcome Back!</h1>
+        <h1 className="text-5xl py-6 font-bold bg-gradient-to-br from-cyan-500 to-blue-600 inline-block text-transparent bg-clip-text">Great Seeing you Back!</h1>
         <hr className="w-[50%] mb-6 border-t border-gray-300" />
         <form className="flex min-w-xs max-w-sm flex-col gap-4">
           <div>
@@ -31,7 +31,7 @@ const LoginForm = () => {
             <div className="mb-2 block">
               <Label htmlFor="password1">Your password:</Label>
             </div>
-            <TextInput id="password1" type="password" required />
+            <TextInput id="password1" type="password" placeholder="********" required />
           </div>
           {/*<div className="flex items-center gap-2">*/}
           {/*  <Checkbox id="remember" />*/}
