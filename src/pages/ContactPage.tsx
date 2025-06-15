@@ -1,5 +1,6 @@
 import type { FooterProps } from "../types/types.ts";
 import {useEffect} from "react";
+import {Mail, Phone, MapPin} from 'lucide-react';
 
 const ContactPage = ({footer}: FooterProps) => {
 
@@ -12,14 +13,14 @@ const ContactPage = ({footer}: FooterProps) => {
       <section className="flex flex-col p-5 space-y-6 justify-center items-center bg-gradient-to-r from-pink-400 to-orange-100 min-h-[100vh]">
         <h1 className="mt-16 text-4xl font-extrabold text-gray-900 dark:text-white md:text-5xl">Contact <span className="text-transparent bg-clip-text bg-gradient-to-r to-pink-600 from-orange-400">Us</span></h1>
 
-        <p className="text-lg font-normal text-center text-gray-700 lg:text-xl dark:text-gray-600 max-w-3xl">
+        <p className="text-lg font-normal text-center text-gray-700 lg:text-xl">
           Have questions, suggestions, or need support? We’d love to hear from you.
         </p>
 
         <div className="flex flex-col items-center space-y-2 text-center">
-          <p className="text-md text-gray-500 ">📧 Email: <a href="mailto:support@myreserva.com" className="text-blue-500 hover:underline">support@myreserva.com</a></p>
-          <p className="text-md text-gray-500 ">📞 Phone: <a href="tel:+1234567890" className="text-blue-500 hover:underline">+1 (234) 567-890</a></p>
-          <p className="text-md text-gray-500 ">📍 Location: 123 Main St, Your City, Your Country</p>
+          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><Mail /> Email:&nbsp;<a href="mailto:support@myreserva.com" className="text-blue-500 hover:underline">support@myreserva.com</a></div> </p>
+          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><Phone /> Phone:&nbsp;<a href="tel:+1234567890" className="text-blue-500 hover:underline">+1 (234) 567-890</a></div> </p>
+          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><MapPin /> Location: 123 Main St, Your City, Your Country</div> </p>
         </div>
 
         <button

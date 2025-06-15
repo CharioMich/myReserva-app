@@ -1,24 +1,28 @@
 
 import { Datepicker ,Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from "flowbite-react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {TextModal} from "./TextModal.tsx";
 
 export function AdminDashboardTable() {
+
+  useEffect(() => {
+    document.title = "myReserva | Dashboard";
+  }, []);
 
   const onClose = () => {
     setOpenModal(false);
   }
 
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="max-w-5xl h-[70vh] bg-gray-100 mt-20 overflow-x-auto w-full m-auto rounded-2xl p-2 border border-gray-300 shadow">
+    <div className="max-w-5xl h-[70vh] bg-blue-100 mt-20 overflow-x-auto w-full m-auto rounded-2xl p-2 border border-gray-300 shadow">
       <TextModal open={openModal} onClose={onClose} />
       <Datepicker className="mb-2 font-bold" />
       <Table>
         <TableHead>
           {/**/}
-          <TableRow className="bg-gradient-to-r from-cyan-200 to-emerald-400">
+          <TableRow className="bg-gradient-to-r from-cyan-200 to-emerald-300">
             <TableHeadCell className="bg-transparent">Full Name</TableHeadCell>
             <TableHeadCell className="bg-transparent">Phone No.</TableHeadCell>
             <TableHeadCell className="bg-transparent">E-mail</TableHeadCell>
@@ -27,7 +31,7 @@ export function AdminDashboardTable() {
           </TableRow>
         </TableHead>
         <TableBody className="divide-y">
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -40,7 +44,7 @@ export function AdminDashboardTable() {
               </button>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-sky-200">
+          <TableRow className="border-gray-700 bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -53,7 +57,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -66,7 +70,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -79,7 +83,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -92,7 +96,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -105,7 +109,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -118,7 +122,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Microsoft Surface Pro
             </TableCell>
@@ -131,7 +135,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-200">
+          <TableRow className="border-gray-700 bg-gray-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900 ">Magic Mouse 2</TableCell>
             <TableCell>Black</TableCell>
             <TableCell>Accessories</TableCell>

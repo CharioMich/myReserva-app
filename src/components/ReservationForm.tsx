@@ -66,12 +66,13 @@ const ReservationForm = () => {
 
   return (
     <>
-      <section className="container flex flex-col items-center justify-center pt-8 mx-auto">
+      <section className="flex flex-col items-center pt-8">
         <h2 className="mt-8 text-gray-600 p-5">New Reservation</h2>
         <hr className="w-[70%] mb-6 border-t border-gray-300 " />
-        <form className="flex flex-col gap-4">
-          <div className="flex flex-row justify-around min-w-xl">
-            <div className="flex flex-col mb-2 space-y-2">
+        <form className="md:flex md:flex-col gap-4">
+          <div className="md:flex md:flex-row md:justify-around md:min-w-xl">
+            {/* Datepicker */}
+            <div className="md:flex md:flex-col mb-2 space-y-2 ">
               <Label htmlFor="date">Select date:</Label>
               <Datepicker
                 id="date"
@@ -89,7 +90,8 @@ const ReservationForm = () => {
                 </div>
               )}
             </div>
-            <div>
+            {/* Time buttons */}
+            <div className="flex flex-col items-center">
               <Label htmlFor="time">Select time:</Label>
               <ul id="time" className="grid grid-cols-3 gap-2 list-none mt-2">
                 {times.map((time: ResTime) => (
@@ -109,13 +111,13 @@ const ReservationForm = () => {
               </div>
             </div>
           </div>
-          <div className="">
+          <div className="py-1">
             <div className="mb-2 block">
               <Label htmlFor="comment">Extra details (if needed):</Label>
             </div>
             <Textarea id="comment" placeholder="Leave a comment..." rows={4}/>
           </div>
-          <Button type="submit">Confirm Reservation</Button>
+          <Button className="w-full mx-auto" type="submit">Confirm Reservation</Button>
         </form>
       </section>
     </>
