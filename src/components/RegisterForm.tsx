@@ -1,8 +1,85 @@
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import {Button, Checkbox, HelperText, Label, TextInput} from "flowbite-react";
 import { Link } from "react-router";
 import {useEffect, useRef, useState} from "react";
+import type {RegisterFormErrors} from "../types/types.ts";
+import {z} from "zod";
+
+const formSchema = z.object({
+  name: z.string().trim().nonempty("Name is required.").min(2, "Name must be at least 2 characters"),
+  surname: z.string().trim().nonempty("Surname is required.").min(2, "Surname must be at least 2 characters"),
+  email: z.string().trim().nonempty("Email is required.").email("Email is invalid."),
+  phone: z.string().trim().nonempty("Phone number required.").regex(/^\d{10}$/, "Phone must be at least 10 characters"),
+  password: z.string().trim().nonempty("Password required.")
+    .min(8, "Password must be at least 8 characters")
+    .max(16, "Password must be at most 16 characters")
+    .regex(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/, "Password must contain at least one uppercase, one lowercase, one number 0-9, one symbol and no spaces"),
+  repeatPassword: z.string().trim().nonempty("Confirm password missing.")
+}).refine((data) => data.password === data.repeatPassword, { // validate confirmPassword
+  path: ["repeatPassword"],
+  message: "Passwords do not match.",
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+const initialValues: FormValues = {
+  name: "",
+  surname: "",
+  email: "",
+  phone: "",
+  password: "",
+  repeatPassword: "",
+};
 
 const RegisterForm = () => {
+
+  const [values, setValues] = useState<FormValues>(initialValues);
+  const [errors, setErrors] = useState<RegisterFormErrors | null>(null);
+
+  /**
+   * Actual validation using zod's safeParse
+   */
+  const validateForm = (): boolean => {
+    const result = formSchema.safeParse(values);
+
+    if (!result.success) {
+      const newErrors: RegisterFormErrors = {};
+
+      result.error.issues.forEach((error) => {
+        const fieldName = error.path[0] as keyof FormValues;  // type check
+        newErrors[fieldName] = error.message; // Populate newErrors Object
+      });
+      setErrors(newErrors);
+      return false;
+    }
+    // if there are no errors
+    setErrors({});  // "clear" past/previous errors
+    return true;
+  };
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [event.target.name]: undefined
+    }));
+
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const isValid = validateForm();
+    if (isValid) {
+
+      // TODO call API to submit data
+    }
+
+  };
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -14,7 +91,7 @@ const RegisterForm = () => {
 
   useEffect(() => {
     inputRef.current?.focus();
-  })
+  }, [])
 
   return (
     <section className="container flex flex-col items-center justify-center pt-15 mx-auto mt-10">
@@ -23,7 +100,7 @@ const RegisterForm = () => {
         >Sign In</span>
       </h1>
       <hr className="w-[50%] mb-6 border-t border-gray-300" />
-      <form className="flex min-w-sm max-w-md flex-col gap-3">
+      <form onSubmit={handleSubmit} className="flex md:w-md flex-col gap-3">
         <div>
           <div className="mb-2 block">
             <Label htmlFor="name">Your name:</Label>
@@ -31,11 +108,18 @@ const RegisterForm = () => {
           <TextInput
             ref={inputRef}
             id="name"
+            name="name"
+            value={values.name}
+            onChange={handleChange}
             type="text"
             placeholder="Name"
-            required
             shadow
           />
+          {errors?.name && (
+            <HelperText>
+              <span className="text-red-700">{errors.name}</span>
+            </HelperText>
+          )}
         </div>
         <div>
           <div className="mb-2 block">
@@ -43,48 +127,94 @@ const RegisterForm = () => {
           </div>
           <TextInput
             id="surname"
+            name="surname"
+            value={values.surname}
+            onChange={handleChange}
             type="text"
             placeholder="Surname"
-            required
             shadow
           />
+          {errors?.surname && (
+            <HelperText>
+              <span className="text-red-700">{errors.surname}</span>
+            </HelperText>
+          )}
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email2">Your email:</Label>
+            <Label htmlFor="email">Your email:</Label>
           </div>
           <TextInput
-            id="email2"
+            id="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
             type="email"
             placeholder="name@myreserva.com"
-            required
             shadow
           />
+          {errors?.email && (
+            <HelperText>
+              <span className="text-red-700">{errors.email}</span>
+            </HelperText>
+          )}
         </div>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="phone">Your phone number:</Label>
           </div>
           <TextInput
-            ref={inputRef}
             id="phone"
+            name="phone"
+            value={values.phone}
+            onChange={handleChange}
             type="tel"
             placeholder="Phone number"
-            required
             shadow
           />
+          {errors?.phone && (
+            <HelperText>
+              <span className="text-red-700">{errors.phone}</span>
+            </HelperText>
+          )}
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password2">Your password:</Label>
+            <Label htmlFor="password">Your password:</Label>
           </div>
-          <TextInput id="password2" type="password" placeholder="********" required shadow />
+          <TextInput
+            id="password"
+            name="password"
+            value={values.password}
+            onChange={handleChange}
+            type="password"
+            placeholder="********"
+            shadow
+          />
+          {errors?.password && (
+            <HelperText>
+              <span className="text-red-700">{errors.password}</span>
+            </HelperText>
+          )}
         </div>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="repeat-password">Confirm password:</Label>
           </div>
-          <TextInput id="repeat-password" type="password" placeholder="********" required shadow />
+          <TextInput
+            id="repeat-password"
+            name="repeat-password"
+            value={values.repeatPassword}
+            onChange={handleChange}
+            type="password"
+            placeholder="********"
+            shadow
+          />
+          {errors?.repeatPassword && (
+            <HelperText>
+              <span className="text-red-700">{errors.repeatPassword}</span>
+            </HelperText>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <Checkbox
@@ -104,7 +234,7 @@ const RegisterForm = () => {
           type="submit"
         >Register new account</Button>
       </form>
-      <div className="flex flex-col items-center min-w-sm max-w-md mt-6">
+      <div className="flex flex-col gap-3 items-center md:w-md mt-6">
         <p className="text-sm">Already have an account?</p>
         <Button color="dark" className="w-full mt-1" ><Link className="block w-full" to="/login">Log In</Link></Button>
       </div>

@@ -15,7 +15,7 @@ export function TextModal({ open, onClose }: ModalComponentProps) {
   return (
     <>
       <Modal show={open} onClose={onClose}>
-        <ModalHeader>Client's Text</ModalHeader>
+        <ModalHeader>Additional Info</ModalHeader>
         <ModalBody>
           <div className="space-y-6">
             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">

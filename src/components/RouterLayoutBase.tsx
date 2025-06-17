@@ -6,7 +6,7 @@ const RouterLayoutBase = () => {
   return (
     <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
       <Nav />
-      <main className="flex-grow">
+      <main>
         <Outlet />
       </main>
       {/*<Footer />*/}

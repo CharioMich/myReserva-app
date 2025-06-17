@@ -1,42 +1,85 @@
-import { Button, Label, TextInput } from "flowbite-react";
+import { Button, HelperText, Label, TextInput } from "flowbite-react";
 import {Link} from "react-router";
-import {useEffect, useRef} from "react";
+import { useState, useEffect, useRef} from "react";
+import type {LoginFormValues, LoginFormErrors} from "../types/types.ts";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 const LoginForm = () => {
+
+  const [values, setValues] = useState<LoginFormValues>(initialValues);
+  const [errors, setErrors] = useState<LoginFormErrors | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // TODO: Call API? and set errors if they exist
+
+    setValues(initialValues); // After submission, clear values
+    setErrors(null);        // clear errors
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValues((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [e.target.name]: undefined // If there are already errors into the object, we destroy them with 'undefined', because 'errors' gets populated on submit
+    }));
+  };
+
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
-  })
+  }, []);
 
   return (
       <section className="container flex flex-col items-center justify-center pt-9 mx-auto mt-10">
         <h1 className="text-5xl py-6 font-bold bg-gradient-to-br from-cyan-500 to-blue-600 inline-block text-transparent bg-clip-text">Great Seeing you Back!</h1>
         <hr className="w-[50%] mb-6 border-t border-gray-300" />
-        <form className="flex min-w-xs max-w-sm flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex min-w-xs max-w-sm flex-col gap-4">
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email1">Your email:</Label>
+              <Label htmlFor="email">Your email:</Label>
             </div>
             <TextInput
               ref={inputRef}
-              id="email1"
-              type="email"
+              id="email"
+              name="email"
+              value={values.email}
+              type="text"
+              onChange={handleChange}
               placeholder="name@myreserva.com"
               required
             />
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password1">Your password:</Label>
+              <Label htmlFor="password">Your password:</Label>
             </div>
-            <TextInput id="password1" type="password" placeholder="********" required />
+            <TextInput
+              id="password"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              placeholder="********"
+              required
+            />
           </div>
-          {/*<div className="flex items-center gap-2">*/}
-          {/*  <Checkbox id="remember" />*/}
-          {/*  <Label htmlFor="remember">Remember me</Label>*/}
-          {/*</div>*/}
+          {Object.keys(errors).length > 0 && (
+            <HelperText>
+              <span className="font-medium text-red-700">Oops!</span> Invalid username or password.
+            </HelperText>
+          )}
           <Button className="mt-2" type="submit">Log In</Button>
         </form>
         <div className="flex flex-col items-center min-w-xs max-w-sm mt-6">

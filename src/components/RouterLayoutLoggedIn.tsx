@@ -1,15 +1,15 @@
 import {Outlet} from "react-router";
 import NavLoggedIn from "./NavLoggedIn.tsx";
-// import Footer from "./Footer.tsx";
+// import RegisterFooter from "./RegisterFooter.tsx";
+
 
 const RouterLayoutBase = () => {
   return (
     <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
       <NavLoggedIn />
-      <main className="flex-grow">
+      <main>
         <Outlet />
       </main>
-      {/*<Footer />*/}
     </div>
   )
 }

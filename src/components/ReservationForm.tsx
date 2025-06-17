@@ -106,8 +106,8 @@ const ReservationForm = () => {
                 ))}
               </ul>
               <div className="flex flex-col mt-3 items-center">
-                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-600"></div><span>Available time</span></div>
-                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-300"></div><span>Reserved time</span></div>
+                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-600"></div><i>Available time</i></div>
+                <div className="flex flex-row"><div className="w-4 h-4 mt-1 mr-2 rounded bg-blue-300"></div><i>Reserved time</i></div>
               </div>
             </div>
           </div>

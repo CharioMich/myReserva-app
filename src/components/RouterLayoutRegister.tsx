@@ -7,7 +7,7 @@ const RouterLayoutRegister = () => {
     <>
       <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
         <RegisterNav />
-        <main className="flex-grow">
+        <main>
           <Outlet />
         </main>
         <RegisterFooter />

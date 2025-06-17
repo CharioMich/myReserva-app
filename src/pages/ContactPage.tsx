@@ -19,8 +19,8 @@ const ContactPage = ({footer}: FooterProps) => {
 
         <div className="flex flex-col items-center space-y-2 text-center">
           <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><Mail /> Email:&nbsp;<a href="mailto:support@myreserva.com" className="text-blue-500 hover:underline">support@myreserva.com</a></div> </p>
-          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><Phone /> Phone:&nbsp;<a href="tel:+1234567890" className="text-blue-500 hover:underline">+1 (234) 567-890</a></div> </p>
-          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><MapPin /> Location: 123 Main St, Your City, Your Country</div> </p>
+          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><Phone /> Phone:&nbsp;<a href="tel:+1234567890" className="text-blue-500 hover:underline">+30 123-4567-890</a></div> </p>
+          <p className="text-md text-gray-600 "><div className="flex flex-row items-center space-x-1"><MapPin /> Location: 123 Vouliagmenis Av. Athens, Greece</div> </p>
         </div>
 
         <button

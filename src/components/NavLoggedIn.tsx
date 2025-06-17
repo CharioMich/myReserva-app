@@ -16,8 +16,8 @@ export default function NavLoggedIn() {
 
   return (
     <nav className="fixed top-0 start-0 z-50 w-screen ">
-      <Navbar className="bg-linear-to-r from-gray-700 to-gray-800 text-white"  >
-        <NavbarBrand href="/dashboard">
+      <Navbar className="bg-gradient-to-b from-gray-700 to-gray-800 text-white"  >
+        <NavbarBrand href="/">
           <img src="/calendar.png" className="mr-2 h-6 sm:h-9" alt="App Logo" />
           <span className="self-center whitespace-nowrap text-white text-xl font-semibold">myReserva</span>
         </NavbarBrand>
@@ -41,7 +41,7 @@ export default function NavLoggedIn() {
         </div>
         <NavbarCollapse>
           <NavbarLink
-            href="/dashboard"
+            href="/"
             className="text-white hover:text-gray-700"
           >Home
           </NavbarLink>
@@ -61,7 +61,7 @@ export default function NavLoggedIn() {
           >Util
           </NavbarLink>
           <NavbarLink
-            href="/dashboard"
+            href="/user-dashboard"
             className="text-white hover:text-gray-700"
           >Util2
           </NavbarLink>
