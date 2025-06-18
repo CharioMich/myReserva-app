@@ -1,4 +1,5 @@
 import type {bgProps} from "../types/types.ts";
+import {Link} from "react-router";
 
 const RegisterFooter = ({bg}: bgProps) => {
   return (
@@ -7,7 +8,7 @@ const RegisterFooter = ({bg}: bgProps) => {
         <hr className="my-3 border-gray-400 lg:my-4"/>
         <span className="block pt-2 text-md text-gray-600 text-center"
         >
-          &copy; {new Date().getFullYear()} <a href="/" className="hover:underline">myReserva™</a>. All Rights Reserved.</span>
+          &copy; {new Date().getFullYear()} <Link to="/" className="hover:underline">myReserva™</Link>. All Rights Reserved.</span>
       </div>
     </footer>
   )

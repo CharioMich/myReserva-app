@@ -80,7 +80,7 @@ const ReservationForm = () => {
                 minDate={today}
                 maxDate={maxDate} />
               {date && selectedTime && (
-                <div className="flex flex-col items-center my-auto py-10 rounded-2xl space-y-2 bg-gradient-to-br from-pink-500 to-orange-500 shadow-2xl shadow-blue-300">
+                <div className="flex flex-col items-center my-auto py-10 rounded-2xl space-y-2 bg-gradient-to-br from-pink-500 to-orange-500 shadow-lg shadow-gray-500">
                   <p>
                     <strong className="text-white font-extrabold">{date ? fullDate : "Select date"}</strong>
                   </p>

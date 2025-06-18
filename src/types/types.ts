@@ -3,6 +3,11 @@ export interface FooterProps {
   footer?: React.ReactNode;
 }
 
+export type ReservationComponentProps = {
+  isActive: boolean;
+}
+
+// For footer component. To add class to match page background
 export type bgProps = {
   bg?: string
 }

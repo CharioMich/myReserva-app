@@ -31,7 +31,7 @@ export function AdminDashboardTable() {
           </TableRow>
         </TableHead>
         <TableBody className="divide-y">
-          <TableRow className="border-gray-700 bg-gray-100">
+          <TableRow className="border-gray-700 bg-gray-100 hover:bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -44,7 +44,7 @@ export function AdminDashboardTable() {
               </button>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-blue-100">
+          <TableRow className="border-gray-700 bg-gray-100 hover:bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -57,7 +57,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-100">
+          <TableRow className="border-gray-700 bg-gray-100 hover:bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -70,7 +70,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-100">
+          <TableRow className="border-gray-700 bg-gray-100 hover:bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>
@@ -83,7 +83,7 @@ export function AdminDashboardTable() {
               </a>
             </TableCell>
           </TableRow>
-          <TableRow className="border-gray-700 bg-gray-100">
+          <TableRow className="border-gray-700 bg-gray-100 hover:bg-blue-100">
             <TableCell className="whitespace-nowrap font-medium text-gray-900">
               Charalampos Michalakis
             </TableCell>

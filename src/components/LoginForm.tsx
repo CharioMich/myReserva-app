@@ -16,7 +16,9 @@ const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO: Call API? and set errors if they exist
+    // TODO: Call API? and set errors if they exist. Then redirect ? / navigate
+    // setErrors()
+    // if (errors) { ... return; }
 
     setValues(initialValues); // After submission, clear values
     setErrors(null);        // clear errors
@@ -28,10 +30,6 @@ const LoginForm = () => {
       [e.target.name]: e.target.value
     }));
 
-    setErrors((prev) => ({
-      ...prev,
-      [e.target.name]: undefined // If there are already errors into the object, we destroy them with 'undefined', because 'errors' gets populated on submit
-    }));
   };
 
 
@@ -75,9 +73,9 @@ const LoginForm = () => {
               required
             />
           </div>
-          {Object.keys(errors).length > 0 && (
-            <HelperText>
-              <span className="font-medium text-red-700">Oops!</span> Invalid username or password.
+          {errors && Object.keys(errors).length > 0 && (
+            <HelperText className="text-center">
+              <span className="text-red-700">Oops! Invalid username or password.</span>
             </HelperText>
           )}
           <Button className="mt-2" type="submit">Log In</Button>

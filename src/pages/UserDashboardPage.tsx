@@ -29,13 +29,13 @@ const UserDashboardPage = ({footer}: FooterProps) => {
         {res
           ? (
           <div className="flex flex-wrap justify-evenly mt-10 space-y-8 space-x-3">
-            <UserReservationComponent />
-            <UserReservationComponent />
-            <UserReservationComponent />
-            <UserReservationComponent />
-            <UserReservationComponent />
-            <UserReservationComponent />
-            <UserReservationComponent />
+            <UserReservationComponent isActive={true} />
+            <UserReservationComponent isActive={true} />
+            <UserReservationComponent isActive={false} />
+            <UserReservationComponent isActive={true} />
+            <UserReservationComponent isActive={true} />
+            <UserReservationComponent isActive={true} />
+            <UserReservationComponent isActive={true} />
           </div>
         )
         : (

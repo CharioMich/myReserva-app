@@ -4,16 +4,33 @@ import {useEffect, useRef, useState} from "react";
 import type {RegisterFormErrors} from "../types/types.ts";
 import {z} from "zod";
 
+// Form schema and validation with Zod
 const formSchema = z.object({
-  name: z.string().trim().nonempty("Name is required.").min(2, "Name must be at least 2 characters"),
-  surname: z.string().trim().nonempty("Surname is required.").min(2, "Surname must be at least 2 characters"),
-  email: z.string().trim().nonempty("Email is required.").email("Email is invalid."),
-  phone: z.string().trim().nonempty("Phone number required.").regex(/^\d{10}$/, "Phone must be at least 10 characters"),
-  password: z.string().trim().nonempty("Password required.")
+  name: z.string()
+    .trim()
+    .nonempty("Name is required.")
+    .min(2, "Name must be at least 2 characters"),
+  surname: z.string()
+    .trim()
+    .nonempty("Surname is required.")
+    .min(2, "Surname must be at least 2 characters"),
+  email: z.string()
+    .trim()
+    .nonempty("Email is required.")
+    .email("Email is invalid."),
+  phone: z.string()
+    .trim()
+    .nonempty("Phone number required.")
+    .regex(/^\d{10}$/, "Phone must be at least 10 characters"),
+  password: z.string()
+    .trim()
+    .nonempty("Password required.")
     .min(8, "Password must be at least 8 characters")
     .max(16, "Password must be at most 16 characters")
     .regex(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$/, "Password must contain at least one uppercase, one lowercase, one number 0-9, one symbol and no spaces"),
-  repeatPassword: z.string().trim().nonempty("Confirm password missing.")
+  repeatPassword: z.string()
+    .trim()
+    .nonempty("Confirm password missing.")
 }).refine((data) => data.password === data.repeatPassword, { // validate confirmPassword
   path: ["repeatPassword"],
   message: "Passwords do not match.",
@@ -36,11 +53,12 @@ const RegisterForm = () => {
   const [errors, setErrors] = useState<RegisterFormErrors | null>(null);
 
   /**
-   * Actual validation using zod's safeParse
+   * Actual validation using zod's safeParse()
    */
   const validateForm = (): boolean => {
     const result = formSchema.safeParse(values);
 
+    // if there are errors
     if (!result.success) {
       const newErrors: RegisterFormErrors = {};
 
@@ -76,8 +94,8 @@ const RegisterForm = () => {
     const isValid = validateForm();
     if (isValid) {
 
-      // TODO call API to submit data
-    }
+      // TODO call API to submit data and navigate() / redirect
+     }
 
   };
 

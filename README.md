@@ -56,3 +56,8 @@ export default tseslint.config({
 ## References
 
 Calendar PNG & Favicon: https://freesvgicons.com/search?q=calendar
+
+## Forms
+Register Form was implemented with states and simple flowbite components
+to demonstrate understanting of form handling and validation.
+The best alternative for a cleaner outcome would be a React Hook Form.
