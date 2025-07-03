@@ -1,4 +1,6 @@
-// COMPONENT TYPES
+/**
+ * COMPONENT TYPES
+ */
 export interface FooterProps {
   footer?: React.ReactNode;
 };
@@ -14,7 +16,9 @@ export type bgProps = {
   bg?: string
 };
 
-// REGISTER TYPE
+/**
+ * REGISTER TYPE
+ */
 export type RegisterFormErrors = {
   username?: string,
   name?: string,
@@ -25,8 +29,10 @@ export type RegisterFormErrors = {
   repeatPassword?: string,
 };
 
-// LOGIN TYPES
-export type LoginFormValues = {
+/**
+ * LOGIN TYPES
+ */
+export type LoginFields = {
   email: string,
   password: string,
 };
@@ -35,14 +41,28 @@ export type LoginFormErrors = {
   password?: string,
 };
 
-// RESERVATION TYPES
+
+/**
+ * RESERVATION TYPES
+ */
 export type ReservationType = {
   id: string;
   userId: string;
-  date: string;         // syntheto PK sth vash?
-  hourId: string;     // syntheto PK sth vash?
+  date: string;
+  hourId: string;
   text: string;
   isActive: boolean;
+};
+
+/**
+ * USER TYPES
+ */
+export type userDetails = {
+  userId: string;
+  username: string;
+  email: string;
+  phoneNumber: string;
+  role: string;
 };
 
 
@@ -51,4 +71,6 @@ export type ResTime = {
   available: boolean;
   hours: string;
   checked: boolean;
-}
+};
+
+
