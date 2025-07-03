@@ -12,7 +12,7 @@ import type {AuthContextProps} from "./AuthContext.ts";
 export const AuthProvider = ({children}: {children: ReactNode}) => {
 
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [tenantId, setTenantId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
   const [userDetails, setUserDetails] = useState<userDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -26,14 +26,14 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     if (token) {
       try {
         const decoded = jwtDecode<string>(token);
-        console.log(decoded);
-        // TODO API call to get user data. Then setUserDetails(fetchedUserData). This way we initialize the AuthContext
+        console.log("DECODED", decoded);
+        // TODO API call to get user data. Then setUserDetails(fetchedUserData). This way we initialize the AuthContext ???????????????
       } catch {
         // Call refresh token ??? TODO
-        setTenantId(null);
+        setUserId(null);
       }
     } else {
-      setTenantId(null);
+      setUserId(null);
       logoutUser();
       // navigate to login ??? TODO
     }
@@ -68,34 +68,19 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const logoutUser = () => {
     removeCookie("access_token");
     setAccessToken(null);
+    setUserId(null);
     setUserDetails(null);
     // TODO Call api /logout route
   }
 
-  /**
-   * REFRESH TOKEN
-   */
-  const refreshToken = async () => {
-    const res = await fetch('/api/auth/refresh', {
-      method: 'POST',
-      credentials: 'include', // Needed to send the refreshToken cookie
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      setAccessToken(data.accessToken);
-    } else {
-      // Handle logout or retry login
-    }
-  };
 
   const contextValue: AuthContextProps = {
     isAuthenticated: !!accessToken,
     accessToken,
+    setAccessToken,
     userDetails,
     loginUser,
     logoutUser,
-    refreshToken,
     loading
   };
 
