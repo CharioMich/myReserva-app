@@ -5,9 +5,9 @@ import NavLoggedIn from "./NavLoggedIn.tsx";
 
 const RouterLayoutBase = () => {
   return (
-    <div className="flex flex-col max-h-[100vh] min-h-[100vh]">
+    <div className="flex flex-col h-[100vh]">
       <NavLoggedIn />
-      <main>
+      <main className="h-[100vh]">
         <Outlet />
       </main>
     </div>
