@@ -1,7 +1,8 @@
 import { Button, HelperText, Label, TextInput } from "flowbite-react";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import { useState, useEffect, useRef} from "react";
-import type {LoginFormValues, LoginFormErrors} from "../types/types.ts";
+import type {LoginFields, LoginFormErrors, userDetails} from "../types/types.ts";
+import {useAuth} from "../hooks/useAuth.ts";
 
 const initialValues = {
   email: "",
@@ -10,15 +11,31 @@ const initialValues = {
 
 const LoginForm = () => {
 
-  const [values, setValues] = useState<LoginFormValues>(initialValues);
+  const [values, setValues] = useState<LoginFields>(initialValues);
   const [errors, setErrors] = useState<LoginFormErrors | null>(null);
+  // const [isSubmitting, setIsSubmitting] = useState(false); // TODO disable form button on submitting
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+
+  const { loginUser } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO: Call API? and set errors if they exist. Then redirect ? / navigate
-    // setErrors()
-    // if (errors) { ... return; }
+    // TODO Improve Error handling
+    try {
+      const data: userDetails = await loginUser(values);
+
+      if (data?.role === 'admin') {
+        navigate('/admin-dashboard');
+      } else if (data?.role === 'user'){
+        navigate('/user-dashboard');
+      } else {
+        throw new Error("Invalid login response");
+      }
+    } catch (err) {
+      console.error(err instanceof Error ? err.message : "Login failed");
+    }
 
     setValues(initialValues); // After submission, clear values
     setErrors(null);        // clear errors
@@ -46,11 +63,11 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit} className="flex min-w-xs max-w-sm flex-col gap-4">
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="email">Your email:</Label>
+              <Label htmlFor="login-email">Your email:</Label>
             </div>
             <TextInput
               ref={inputRef}
-              id="email"
+              id="login-email"
               name="email"
               value={values.email}
               type="text"
@@ -61,10 +78,10 @@ const LoginForm = () => {
           </div>
           <div>
             <div className="mb-2 block">
-              <Label htmlFor="password">Your password:</Label>
+              <Label htmlFor="login-password">Your password:</Label>
             </div>
             <TextInput
-              id="password"
+              id="login-password"
               type="password"
               name="password"
               value={values.password}
