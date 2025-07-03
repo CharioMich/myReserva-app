@@ -1,7 +1,12 @@
 import {Button, Navbar, NavbarLink, NavbarBrand, NavbarCollapse, NavbarToggle} from "flowbite-react";
-import {Link} from "react-router";
+import {Link, useLocation} from "react-router";
 
 export default function Nav() {
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const navLinkClass = "text-white hover:text-gray-700 active:text-red-400";
 
   return (
     <nav className="fixed top-0 start-0 z-50 w-screen ">
@@ -31,27 +36,30 @@ export default function Nav() {
           {/*>Contact</Link>*/}
           <NavbarLink
             href="/"
-            className="text-white hover:text-gray-700"
+            active={currentPath === "/"}
+            className={navLinkClass}
           >Home
           </NavbarLink>
           <NavbarLink
             href="/about"
-            className="text-white hover:text-gray-700"
+            active={currentPath === "/about"}
+            className={navLinkClass}
           >About
           </NavbarLink>
           <NavbarLink
             href="/contact"
-            className="text-white hover:text-gray-700"
+            active={currentPath === "/contact"}
+            className={navLinkClass}
           >Contact
           </NavbarLink>
           <NavbarLink
             href="/new-reservation"
-            className="text-white hover:text-gray-700"
+            className={navLinkClass}
           >Util
           </NavbarLink>
           <NavbarLink
             href="/admin-dashboard"
-            className="text-white hover:text-gray-700"
+            className={navLinkClass}
           >Util2
           </NavbarLink>
         </NavbarCollapse>

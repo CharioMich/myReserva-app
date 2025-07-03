@@ -10,9 +10,14 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-// import {Link} from "react-router";
+import {Link, useLocation} from "react-router";
 
 export default function NavLoggedIn() {
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const dropItemStyle: string = 'font-semibold text-gray-600'
 
   return (
     <nav className="fixed top-0 start-0 z-50 w-screen ">
@@ -33,7 +38,8 @@ export default function NavLoggedIn() {
               <span className="block text-sm">Johnny Doe</span>
               <span className="block truncate text-sm font-medium">name@myReserva.com</span>
             </DropdownHeader>
-            <DropdownItem>Dashboard</DropdownItem>
+            <DropdownItem className={dropItemStyle} as={Link} to={'/user-dashboard'}>Dashboard</DropdownItem>
+            <DropdownItem className={dropItemStyle} as={Link} to={'/new-reservation'}>New Reservation</DropdownItem>
             <DropdownDivider />
             <DropdownItem className="font-semibold text-red-400 hover:text-red-500">Sign out</DropdownItem>
           </Dropdown>
@@ -42,28 +48,21 @@ export default function NavLoggedIn() {
         <NavbarCollapse>
           <NavbarLink
             href="/"
+            active={currentPath === "/"}
             className="text-white hover:text-gray-700"
           >Home
           </NavbarLink>
           <NavbarLink
             href="/about"
+            active={currentPath === "/about"}
             className="text-white hover:text-gray-700"
           >About
           </NavbarLink>
           <NavbarLink
             href="/contact"
+            active={currentPath === "/contact"}
             className="text-white hover:text-gray-700"
           >Contact
-          </NavbarLink>
-          <NavbarLink
-            href="/new-reservation"
-            className="text-white hover:text-gray-700"
-          >Util
-          </NavbarLink>
-          <NavbarLink
-            href="/user-dashboard"
-            className="text-white hover:text-gray-700"
-          >Util2
           </NavbarLink>
         </NavbarCollapse>
       </Navbar>
