@@ -10,10 +10,20 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import {Link, useLocation} from "react-router";
+import {Link, useNavigate ,useLocation} from "react-router";
+
+import useAuth from "../hooks/useAuth.ts";
 
 export default function NavLoggedIn() {
 
+  const { logoutUser } = useAuth();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/");
+  }
+
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -41,7 +51,7 @@ export default function NavLoggedIn() {
             <DropdownItem className={dropItemStyle} as={Link} to={'/user-dashboard'}>Dashboard</DropdownItem>
             <DropdownItem className={dropItemStyle} as={Link} to={'/new-reservation'}>New Reservation</DropdownItem>
             <DropdownDivider />
-            <DropdownItem className="font-semibold text-red-400 hover:text-red-500">Sign out</DropdownItem>
+            <DropdownItem onClick={handleLogout} className="font-semibold text-red-400 hover:text-red-500">Sign out</DropdownItem>
           </Dropdown>
           <NavbarToggle />
         </div>
