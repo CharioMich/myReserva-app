@@ -1,8 +1,8 @@
 import { Button, HelperText, Label, TextInput } from "flowbite-react";
-import {Link, useNavigate} from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import { useState, useEffect, useRef} from "react";
 import type {LoginFields, LoginFormErrors, userDetails} from "../types/types.ts";
-import {useAuth} from "../hooks/useAuth.ts";
+import useAuth from "../hooks/useAuth.ts";
 
 const initialValues = {
   email: "",
@@ -11,13 +11,15 @@ const initialValues = {
 
 const LoginForm = () => {
 
+  const { loginUser, userDetails } = useAuth();
+
   const [values, setValues] = useState<LoginFields>(initialValues);
   const [errors, setErrors] = useState<LoginFormErrors | null>(null);
   // const [isSubmitting, setIsSubmitting] = useState(false); // TODO disable form button on submitting
 
   const navigate = useNavigate();
-
-  const { loginUser } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || userDetails?.role === 'admin' ? 'admin-dashboard' : '/user-dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,9 +29,17 @@ const LoginForm = () => {
       const data: userDetails = await loginUser(values);
 
       if (data?.role === 'admin') {
-        navigate('/admin-dashboard');
-      } else if (data?.role === 'user'){
-        navigate('/user-dashboard');
+        if (from) {
+          navigate(from, { replace: true })
+        } else {
+          navigate('/admin-dashboard')
+        }
+      } else if (data?.role === 'user') {
+        if (from) {
+          navigate(from, { replace: true })
+        } else {
+          navigate('/user-dashboard')
+        }
       } else {
         throw new Error("Invalid login response");
       }
