@@ -1,11 +1,20 @@
 import {Button, Checkbox, HelperText, Label, TextInput} from "flowbite-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import {useEffect, useRef, useState} from "react";
-import type {RegisterFormErrors} from "../types/types.ts";
 import {z} from "zod";
+import { toast } from "sonner";
+
+// Custom Imports
+import type {RegisterFormErrors} from "../types/types.ts";
+import registerUser from "../api/register.ts";
+import useAuth from "../hooks/useAuth.ts";
 
 // Form schema and validation with Zod
 const formSchema = z.object({
+  username: z.string()
+    .trim()
+    .nonempty("Username is required.")
+    .min(2, "Username must be at least 2 characters"),
   name: z.string()
     .trim()
     .nonempty("Name is required.")
@@ -36,9 +45,10 @@ const formSchema = z.object({
   message: "Passwords do not match.",
 });
 
-type FormValues = z.infer<typeof formSchema>;
+export type RegisterFormValues = z.infer<typeof formSchema>;
 
-const initialValues: FormValues = {
+const initialValues: RegisterFormValues = {
+  username: "",
   name: "",
   surname: "",
   email: "",
@@ -49,8 +59,12 @@ const initialValues: FormValues = {
 
 const RegisterForm = () => {
 
-  const [values, setValues] = useState<FormValues>(initialValues);
+  const { setAccessToken, setUserDetails } = useAuth();
+
+  const [values, setValues] = useState<RegisterFormValues>(initialValues);
   const [errors, setErrors] = useState<RegisterFormErrors | null>(null);
+  // const [isSubmitting, setIsSubmitting] = useState(false); // TODO
+  const navigate = useNavigate();
 
   /**
    * Actual validation using zod's safeParse()
@@ -63,7 +77,7 @@ const RegisterForm = () => {
       const newErrors: RegisterFormErrors = {};
 
       result.error.issues.forEach((error) => {
-        const fieldName = error.path[0] as keyof FormValues;  // type check
+        const fieldName = error.path[0] as keyof RegisterFormValues;  // type check
         newErrors[fieldName] = error.message; // Populate newErrors Object
       });
       setErrors(newErrors);
@@ -88,15 +102,33 @@ const RegisterForm = () => {
 
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isValid = validateForm();
+
+    console.log("Registration Values: ", values);
+
     if (isValid) {
+      try {
+        // API call via registerUser function
+        const result = await registerUser(values);
+        toast.success("User registered successfully.");
 
-      // TODO call API to submit data and navigate() / redirect
+        // console.log("Registration RESULT: ", result)
+
+        setAccessToken(result?.data.accessToken);
+        setUserDetails(result?.data.user);
+
+        setValues(initialValues); // Clear form after submission
+        navigate("/user-dashboard");
+      } catch(error) {
+        toast.error(
+          error instanceof Error ? error.message : "Something went wrong.",
+        );
+        console.log("Error in user registration: ", error);
+      }
      }
-
   };
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -121,10 +153,29 @@ const RegisterForm = () => {
       <form onSubmit={handleSubmit} className="flex md:w-md flex-col gap-3">
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="name">Your name:</Label>
+            <Label htmlFor="name">Username:</Label>
           </div>
           <TextInput
             ref={inputRef}
+            id="username"
+            name="username"
+            value={values.username}
+            onChange={handleChange}
+            type="text"
+            placeholder="Username"
+            shadow
+          />
+          {errors?.name && (
+            <HelperText>
+              <span className="text-red-700">{errors.name}</span>
+            </HelperText>
+          )}
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="name">Firstname:</Label>
+          </div>
+          <TextInput
             id="name"
             name="name"
             value={values.name}
@@ -141,7 +192,7 @@ const RegisterForm = () => {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="surname">Your surname:</Label>
+            <Label htmlFor="surname">Lastname:</Label>
           </div>
           <TextInput
             id="surname"
@@ -221,7 +272,7 @@ const RegisterForm = () => {
           </div>
           <TextInput
             id="repeat-password"
-            name="repeat-password"
+            name="repeatPassword"
             value={values.repeatPassword}
             onChange={handleChange}
             type="password"
