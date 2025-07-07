@@ -6,6 +6,7 @@ export type AuthContextProps = {
   isAuthenticated: boolean;
   accessToken: string | null;
   setAccessToken: (accessToken: string | null) => void; // the one actually given from useState()
+  setUserDetails: (user: userDetails) => void;
   userDetails: userDetails | null;
   loginUser: (fields: LoginFields) => Promise<userDetails>;
   logoutUser: () => void;

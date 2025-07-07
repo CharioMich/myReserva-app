@@ -11,12 +11,21 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import {Link, useNavigate ,useLocation} from "react-router";
+import {useEffect, useState} from "react";
 
 import useAuth from "../hooks/useAuth.ts";
 
+
 export default function NavLoggedIn() {
 
-  const { logoutUser } = useAuth();
+  const { logoutUser, userDetails } = useAuth();
+  const [name, setName] = useState<string | undefined>("");
+  const [email, setEmail] = useState<string | undefined>("");
+
+  useEffect(() => {
+    setName(userDetails?.username);
+    setEmail(userDetails?.email);
+  }, [userDetails]);
 
   const handleLogout = () => {
     logoutUser();
@@ -45,8 +54,8 @@ export default function NavLoggedIn() {
             }
           >
             <DropdownHeader>
-              <span className="block text-sm">Johnny Doe</span>
-              <span className="block truncate text-sm font-medium">name@myReserva.com</span>
+              <span className="block text-sm">Hello, <span className="text-sky-600">{name}</span>!</span>
+              <span className="block truncate text-sm font-medium">{email}</span>
             </DropdownHeader>
             <DropdownItem className={dropItemStyle} as={Link} to={'/user-dashboard'}>Dashboard</DropdownItem>
             <DropdownItem className={dropItemStyle} as={Link} to={'/new-reservation'}>New Reservation</DropdownItem>

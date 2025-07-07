@@ -14,7 +14,6 @@ import type {AuthContextProps} from "./AuthContext.ts";
 export const AuthProvider = ({children}: {children: ReactNode}) => {
 
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
   const [userDetails, setUserDetails] = useState<userDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -36,15 +35,13 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
         }
         populateUser();
       } catch (error) {
-        console.log("ERROR IN AUTH PROVIDER: ", error);
         console.log("User not found: ", error);
       }
     } else {
-      logoutUser();
+      // logoutUser(); // Comment-out to silence errors when app runs
     }
     setLoading(false);
-  }, []);
-
+  }, []); // [userDetails, accessToken]
 
 
   /**
@@ -77,7 +74,6 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     logout();
     removeCookie("access_token");
     setAccessToken(null);
-    setUserId(null);
     setUserDetails(null);
   }
 
@@ -86,6 +82,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     isAuthenticated: !!accessToken,
     accessToken,
     setAccessToken,
+    setUserDetails,
     userDetails,
     loginUser,
     logoutUser,
