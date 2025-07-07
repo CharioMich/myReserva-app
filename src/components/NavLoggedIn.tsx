@@ -64,7 +64,8 @@ export default function NavLoggedIn() {
           </Dropdown>
           <NavbarToggle />
         </div>
-        <NavbarCollapse>
+        <NavbarCollapse className="pr-40">
+          {/* Padding right 40 to match Nav's (not logged in) NavbarLinks positioning (Home, About...) */}
           <NavbarLink
             href="/"
             active={currentPath === "/"}

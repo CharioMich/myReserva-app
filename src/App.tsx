@@ -1,6 +1,6 @@
 import './App.css'
 
-// Disable Dark mode for a seamless UI
+// To disable Dark mode for a seamless UI -> <ThemeConfig dark={false} />
 import { ThemeConfig } from "flowbite-react";
 
 import {BrowserRouter, Route, Routes} from "react-router";
@@ -19,7 +19,7 @@ import RouterLayoutLoggedIn from "./components/RouterLayoutLoggedIn.tsx";
 import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
 import UserDashboardPage from "./pages/UserDashboardPage.tsx";
 import {AuthProvider} from "./context/AuthProvider.tsx";
-// import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 
 function App() {
 
@@ -41,19 +41,19 @@ function App() {
             <Route path="/login" element={<LoginPage/>} />
           </Route>
 
-          {/*<Route path="/*" element={<ProtectedRoute />} >*/}
-          {/*  <Route element={<RouterLayoutLoggedIn />} >*/}
-          {/*    <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />*/}
-          {/*    <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />*/}
-          {/*    <Route path="/user-dashboard" element={<UserDashboardPage footer={<RegisterFooter bg={"bg-gray-800"} />} />} />*/}
-          {/*  </Route>*/}
-          {/*</Route>*/}
-
-          <Route element={<RouterLayoutLoggedIn />} >
-            <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />
-            <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />
-            <Route path="/user-dashboard" element={<UserDashboardPage footer={<RegisterFooter bg={"bg-gray-800"} />} />} />
+          <Route path="/" element={<ProtectedRoute />} >
+            <Route element={<RouterLayoutLoggedIn />} >
+              <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />
+              <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />
+              <Route path="/user-dashboard" element={<UserDashboardPage footer={<RegisterFooter bg={"bg-gray-800"} />} />} />
+            </Route>
           </Route>
+
+          {/*<Route element={<RouterLayoutLoggedIn />} >*/}
+          {/*  <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />*/}
+          {/*  <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />*/}
+          {/*  <Route path="/user-dashboard" element={<UserDashboardPage footer={<RegisterFooter bg={"bg-gray-800"} />} />} />*/}
+          {/*</Route>*/}
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

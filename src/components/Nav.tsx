@@ -52,16 +52,6 @@ export default function Nav() {
             className={navLinkClass}
           >Contact
           </NavbarLink>
-          <NavbarLink
-            href="/new-reservation"
-            className={navLinkClass}
-          >Util
-          </NavbarLink>
-          <NavbarLink
-            href="/admin-dashboard"
-            className={navLinkClass}
-          >Util2
-          </NavbarLink>
         </NavbarCollapse>
       </Navbar>
     </nav>
