@@ -17,13 +17,13 @@ export default function useAxiosPrivate()  {
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {         // onFulfilled
         if (!config.headers['Authorization']) {     // First request attempt. Authorization headers do not exist
-          config.headers['Authorization'] = `Bearer ${authContext?.accessToken}`; // TODO Does not read the accessToken from the state. Not loaded yet?
+          config.headers['Authorization'] = `Bearer ${authContext?.accessToken}`;
           // config.headers['Authorization'] = `Bearer ${accessToken}`;
-          console.log("ENTERED HERE. Access token from STATE: ", authContext?.accessToken) // TODO
         }
         return config;
       }, (error) => Promise.reject(error)   // onRejected
-    )
+    );
+
     // RESPONSE INTERCEPTOR
     const responseIntercept = axiosPrivate.interceptors.response.use(
       response => response,                // onFulfilled -> if the response is ok -> return the response

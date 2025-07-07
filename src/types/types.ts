@@ -54,6 +54,15 @@ export type ReservationType = {
   isActive: boolean;
 };
 
+
+export type ResTime = {
+  id: number;
+  available: boolean;
+  hours: string;
+  checked: boolean;
+};
+
+
 /**
  * USER TYPES
  */
@@ -66,11 +75,5 @@ export type userDetails = {
 };
 
 
-export type ResTime = {
-  id: number;
-  available: boolean;
-  hours: string;
-  checked: boolean;
-};
 
 

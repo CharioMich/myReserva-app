@@ -19,12 +19,12 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || userDetails?.role === 'admin' ? 'admin-dashboard' : '/user-dashboard';
+  const from = location.state?.from?.pathname || userDetails?.role === 'admin' ? '/admin-dashboard' : '/user-dashboard';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO Improve Error handling
+    // TODO Improve Error handling and navigation
     try {
       const data: userDetails = await loginUser(values);
 
@@ -32,13 +32,13 @@ const LoginForm = () => {
         if (from) {
           navigate(from, { replace: true })
         } else {
-          navigate('/admin-dashboard')
+          navigate(import.meta.env.VITE_API_URL + '/admin-dashboard')
         }
       } else if (data?.role === 'user') {
         if (from) {
           navigate(from, { replace: true })
         } else {
-          navigate('/user-dashboard')
+          navigate(import.meta.env.VITE_API_URL + '/user-dashboard')
         }
       } else {
         throw new Error("Invalid login response");
@@ -47,7 +47,7 @@ const LoginForm = () => {
       console.error(err instanceof Error ? err.message : "Login failed");
     }
 
-    setValues(initialValues); // After submission, clear values
+    setValues(initialValues);      // After submission, clear values
     setErrors(null);        // clear errors
   };
 

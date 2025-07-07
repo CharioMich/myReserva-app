@@ -23,13 +23,13 @@ const useRefreshToken = () => {
       if (newAccessToken) {
         setAccessToken(newAccessToken);
         setCookie("access_token", newAccessToken, {
-          // expires: new Date(Date.now() + 60 * 60 * 1000),
-          expires: new Date(Date.now() + 20 * 1000),  // 20 sec
+          expires: new Date(Date.now() + 60 * 60 * 1000), // 60 min
+          // expires: new Date(Date.now() + 20 * 1000),  // 20 sec
           sameSite: "lax",
           secure: false,
           path: "/"
         });
-        console.log("REFRESH TOKEN - new access token:", newAccessToken);
+        // console.log("REFRESH TOKEN - new access token:", newAccessToken);
         return newAccessToken;
       } else {
         throw new Error("No access token returned from API");

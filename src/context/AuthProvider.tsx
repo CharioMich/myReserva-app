@@ -51,8 +51,8 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
 
     const res = await login(fields);
 
-    // const expiry = new Date(Date.now() + 60 * 60 * 1000); // 60 mins
-    const expiry = new Date(Date.now() + 20 * 1000); // 20 sec
+    const expiry = new Date(Date.now() + 60 * 60 * 1000); // 60 mins
+    // const expiry = new Date(Date.now() + 20 * 1000); // 20 sec
     setCookie("access_token", res?.data.accessToken, {
       expires: expiry,
       sameSite: "lax", // strict when in production
@@ -92,8 +92,8 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   return (
     <>
       <AuthContext.Provider value={contextValue}>
-        {/*{!loading && children}*/}
-        {children}
+        {!loading && children}
+      {/* Prevents the rest of the app (routes, pages, etc.) from rendering until the auth state is fully initialized (loading === false). */}
       </AuthContext.Provider>
     </>
   )
