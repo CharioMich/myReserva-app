@@ -15,6 +15,8 @@ import {useEffect, useState} from "react";
 
 import useAuth from "../hooks/useAuth.ts";
 
+import userIcon from '../assets/user-svgrepo-com.svg';
+
 
 export default function NavLoggedIn() {
 
@@ -35,6 +37,7 @@ export default function NavLoggedIn() {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+  const dashboardPath = userDetails?.role === "admin" ? "/admin-dashboard" : "/user-dashboard";
 
   const dropItemStyle: string = 'font-semibold text-gray-600'
 
@@ -50,15 +53,17 @@ export default function NavLoggedIn() {
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+              <Avatar alt="User settings" img={userIcon} bordered status='online' rounded />
             }
           >
             <DropdownHeader>
               <span className="block text-sm">Hello, <span className="text-sky-600">{name}</span>!</span>
               <span className="block truncate text-sm font-medium">{email}</span>
             </DropdownHeader>
-            <DropdownItem className={dropItemStyle} as={Link} to={'/user-dashboard'}>Dashboard</DropdownItem>
-            <DropdownItem className={dropItemStyle} as={Link} to={'/new-reservation'}>New Reservation</DropdownItem>
+            <DropdownItem className={dropItemStyle} as={Link} to={dashboardPath}>Dashboard</DropdownItem>
+            {userDetails?.role === "user" && (
+              <DropdownItem className={dropItemStyle} as={Link} to={'/new-reservation'}>New Reservation</DropdownItem>
+            )}
             <DropdownDivider />
             <DropdownItem onClick={handleLogout} className="font-semibold text-red-400 hover:text-red-500">Sign out</DropdownItem>
           </Dropdown>
