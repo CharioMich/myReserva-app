@@ -20,6 +20,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage.tsx";
 import UserDashboardPage from "./pages/UserDashboardPage.tsx";
 import {AuthProvider} from "./context/AuthProvider.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import NotAuthorizedPage from "./pages/NotAuthorizedPage.tsx";
 
 function App() {
 
@@ -49,13 +50,8 @@ function App() {
             </Route>
           </Route>
 
-          {/*<Route element={<RouterLayoutLoggedIn />} >*/}
-          {/*  <Route path="/new-reservation" element={<ReservationPage footer={ <RegisterFooter/> }/>} />*/}
-          {/*  <Route path="/admin-dashboard" element={<AdminDashboardPage footer={ <RegisterFooter/> }/>} />*/}
-          {/*  <Route path="/user-dashboard" element={<UserDashboardPage footer={<RegisterFooter bg={"bg-gray-800"} />} />} />*/}
-          {/*</Route>*/}
-
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/unauthorized" element={<NotAuthorizedPage />} />
         </Routes>
 
       </BrowserRouter>

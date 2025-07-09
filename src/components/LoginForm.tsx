@@ -11,7 +11,7 @@ const initialValues = {
 
 const LoginForm = () => {
 
-  const { loginUser, userDetails } = useAuth();
+  const { loginUser } = useAuth();
 
   const [values, setValues] = useState<LoginFields>(initialValues);
   const [errors, setErrors] = useState<LoginFormErrors | null>(null);
@@ -19,7 +19,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || userDetails?.role === 'admin' ? '/admin-dashboard' : '/user-dashboard';
+  const from = location.state?.from?.pathname;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,17 +28,17 @@ const LoginForm = () => {
     try {
       const data: userDetails = await loginUser(values);
 
-      if (data?.role === 'admin') {
+      if (data && data?.role === 'admin') {
         if (from) {
-          navigate(from, { replace: true })
+          navigate(from);
         } else {
-          navigate(import.meta.env.VITE_API_URL + '/admin-dashboard')
+          navigate('/admin-dashboard');
         }
-      } else if (data?.role === 'user') {
+      } else if (data && data?.role === 'user') {
         if (from) {
           navigate(from, { replace: true })
         } else {
-          navigate(import.meta.env.VITE_API_URL + '/user-dashboard')
+          navigate('/user-dashboard')
         }
       } else {
         throw new Error("Invalid login response");
