@@ -21,6 +21,7 @@ import UserDashboardPage from "./pages/UserDashboardPage.tsx";
 import {AuthProvider} from "./context/AuthProvider.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import NotAuthorizedPage from "./pages/NotAuthorizedPage.tsx";
+import {Toaster} from "sonner";
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/unauthorized" element={<NotAuthorizedPage />} />
         </Routes>
 
+        <Toaster richColors />
       </BrowserRouter>
     </AuthProvider>
 
