@@ -54,13 +54,19 @@ export type ReservationType = {
   isActive: boolean;
 };
 
-
 export type ResTime = {
   id: number;
-  available: boolean;
+  reserved: boolean;
   hours: string;
   checked: boolean;
 };
+
+export type ReservationProps = {
+  date?: string | null;
+  hours?: string | null;
+  userId?: string;
+  text?: string | null;
+}
 
 
 /**
