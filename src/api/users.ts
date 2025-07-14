@@ -26,7 +26,7 @@ export const getCurrentUser = async () => {
         console.error('Axios error:', error.message);
       }
     } else {
-      console.error('Unexpected error in Login:', error);
+      console.error('Unexpected error in getting current user:', error);
     }
   }
 }
