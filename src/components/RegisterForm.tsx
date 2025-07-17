@@ -1,11 +1,11 @@
-import {Button, Checkbox, HelperText, Label, TextInput} from "flowbite-react";
+import { Button, Checkbox, HelperText, Label, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router";
-import {useEffect, useRef, useState} from "react";
-import {z} from "zod";
+import { useEffect, useRef, useState } from "react";
+import { z } from "zod";
 import { toast } from "sonner";
 
 // Custom Imports
-import type {RegisterFormErrors} from "../types/types.ts";
+import type { RegisterFormErrors } from "../types/types.ts";
 import registerUser from "../api/register.ts";
 import useAuth from "../hooks/useAuth.ts";
 

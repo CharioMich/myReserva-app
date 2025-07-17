@@ -1,7 +1,7 @@
 import { Button, HelperText, Label, TextInput } from "flowbite-react";
 import { Link, useNavigate, useLocation } from "react-router";
 import { useState, useEffect, useRef} from "react";
-import type {LoginFields, LoginFormErrors, userDetails} from "../types/types.ts";
+import type {LoginFields, LoginFormErrors, UserDetails} from "../types/types.ts";
 import useAuth from "../hooks/useAuth.ts";
 
 const initialValues = {
@@ -26,7 +26,7 @@ const LoginForm = () => {
 
     // TODO Improve Error handling and navigation
     try {
-      const data: userDetails = await loginUser(values);
+      const data: UserDetails = await loginUser(values);
 
       if (data && data?.role === 'admin') {
         if (from) {
