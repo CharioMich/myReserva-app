@@ -2,14 +2,14 @@
 import axios from './axios.ts';
 
 // Types
-import type {LoginFields, userDetails} from "../types/types.ts";
+import type {LoginFields, UserDetails} from "../types/types.ts";
 
 import {AxiosError, type AxiosResponse} from "axios";
 
 export type LoginResponse = {
   status: boolean;
   message: string;
-  user: userDetails;
+  user: UserDetails;
 };
 
 const LOGIN_URL = import.meta.env.VITE_API_URL + "/auth/login";
