@@ -4,7 +4,7 @@ import {type ReactNode, useState, useEffect} from "react";
 // Custom imports
 import { getCookie, setCookie, removeCookie } from "../utils/cookie.ts";
 import { getCurrentUser } from "../api/users.ts";
-import type {LoginFields, userDetails} from "../types/types.ts";
+import type {LoginFields, UserDetails} from "../types/types.ts";
 import {login} from "../api/login.ts";
 import {logout} from "../api/logout.ts";
 import {AuthContext} from "./AuthContext.ts";
@@ -14,7 +14,7 @@ import type {AuthContextProps} from "./AuthContext.ts";
 export const AuthProvider = ({children}: {children: ReactNode}) => {
 
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [userDetails, setUserDetails] = useState<userDetails | null>(null);
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   // load user from API or cookie, on mount of component
@@ -41,13 +41,13 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
       // logoutUser(); // Comment-out to silence errors when app runs
     }
     setLoading(false);
-  }, []); // [userDetails, accessToken]
+  }, []); // [UserDetails, accessToken]
 
 
   /**
    * LOGIN
    */
-  const loginUser = async (fields: LoginFields): Promise<userDetails> => {
+  const loginUser = async (fields: LoginFields): Promise<UserDetails> => {
 
     const res = await login(fields);
 
