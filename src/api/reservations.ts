@@ -16,7 +16,6 @@ const RESERVATIONS_URL = import.meta.env.VITE_API_URL + "/reservations";
  * @param payload The reservation data (date, time, text?)
  */
 export const newReservation = async (axiosPrivate: AxiosInstance, payload: ReservationProps) => {
-
   const accessToken = getCookie("access_token");
 
   try {
@@ -37,12 +36,114 @@ export const newReservation = async (axiosPrivate: AxiosInstance, payload: Reser
         console.error('Login Required');
       } else if (error.response?.status === 409) {
         console.log("Selected time already reserved");
-        toast.error("Error during reservation")
+      } else {
+        console.error('Axios error:', error.message);
+      }
+      toast.error("Error during reservation");
+    } else {
+      console.error('Unexpected error in getting reserved times:', error);
+      toast.error("Error during reservation");
+    }
+  }
+}
+
+
+/**
+ * Get the reservations for current user's dashboard page
+ */
+export const getCurrentUserReservations = async (axiosPrivate: AxiosInstance) => {
+  const accessToken = getCookie("access_token");
+
+  try {
+    return await axiosPrivate.get(
+      RESERVATIONS_URL + `/current`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        console.error('Login Required');
+      } else if (error.response?.status === 409) {
+        console.log("Selected time already reserved");
+      } else {
+        console.error('Axios error:', error.message);
+      }
+      toast.error("Error getting user's reservations");
+    } else {
+      console.error("Unexpected error in getting user's reservations:", error);
+      toast.error("Error getting user's reservations")
+    }
+  }
+}
+
+
+/**
+ * Delete Reservation by id
+ */
+export const deleteReservation = async (axiosPrivate: AxiosInstance, id: string | undefined) => {
+  const accessToken = getCookie("access_token");
+  try {
+    if (id) {
+      return await axiosPrivate.delete(
+        RESERVATIONS_URL + `/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          }
+        });
+    } else {
+      throw new Error(`No reservation id provided`);
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        console.error('Login Required');
+      } else if (error.response?.status === 404) {
+        console.error(`No reservation found with id ${id}`);
       } else {
         console.error('Axios error:', error.message);
       }
     } else {
-      console.error('Unexpected error in getting reserved times:', error);
+      console.error("Unexpected error in getting user's reservations:", error);
+    }
+    toast.error("Error while deleting reservation");
+  }
+}
+
+
+/**
+ * Get reservations with user data for admin dashboard
+ */
+export const getReservationsWithUser = async (axiosPrivate: AxiosInstance, date: string) => {
+  const accessToken = getCookie("access_token");
+
+  try {
+    return await axiosPrivate.get(
+      RESERVATIONS_URL + `/${date}`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        }
+      });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 401) {
+        console.error('Login Required');
+      } else if (error.response?.status === 409) {
+        console.log("Selected time already reserved");
+      } else {
+        console.error('Axios error:', error.message);
+      }
+      toast.error("Error getting user's reservations");
+    } else {
+      console.error("Unexpected error in getting user's reservations:", error);
+      toast.error("Error getting user's reservations")
     }
   }
 }

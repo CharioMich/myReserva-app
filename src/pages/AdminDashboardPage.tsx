@@ -1,6 +1,6 @@
 import type { FooterProps } from "../types/types.ts";
-import {useEffect} from "react";
-import {AdminDashboardTable} from "../components/AdminDashboardTable.tsx";
+import { useEffect } from "react";
+import { AdminDashboardTable } from "../components/AdminDashboardTable.tsx";
 
 
 const AdminDashboardPage = ({footer}: FooterProps) => {
