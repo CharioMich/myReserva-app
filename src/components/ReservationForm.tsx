@@ -1,6 +1,6 @@
 import { Label, Textarea, Datepicker, Button } from "flowbite-react";
 import { useEffect, useState } from "react";
-import {AxiosError} from "axios";
+import { AxiosError } from "axios";
 import { parse, format } from 'date-fns';
 import { useLocation, useNavigate } from "react-router";
 
@@ -9,7 +9,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate.ts";
 import { newReservation } from "../api/reservations.ts";
 
 // Types
-import type {ReservationProps, ResTime} from "../types/types.ts";
+import type { ReservationProps, ResTime } from "../types/types.ts";
 import * as React from "react";
 
 
@@ -54,6 +54,7 @@ const ReservationForm = () => {
 
     const controller = new AbortController(); // Axios feature. Kill request if component gets unmounted
 
+    // Get reservations by date
     const getReservations = async () => {
       try {
         const response = await axiosPrivate.get(
@@ -62,7 +63,7 @@ const ReservationForm = () => {
             signal: controller.signal, // Listens for controller.abort() in the clean-up function of useEffect down on line 86
           });
 
-        console.log("Response data", response.data);
+        // console.log("Response data: ", response.data);
 
         if (isMounted) {
           const updatedTimes = allHours.map(timeObj => {
@@ -122,9 +123,9 @@ const ReservationForm = () => {
   /**
    * Set the additional text
    */
-  const handleTextChange = (text: string | null) => {
-    setText(text);
-  }
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  };
 
   /**
    * Mark the selected time button and unmark the previously selected one
@@ -224,7 +225,7 @@ const ReservationForm = () => {
             </div>
             <Textarea
               id="comment"
-              onChange={() => handleTextChange(text)}
+              onChange={handleTextChange}
               placeholder="Leave a comment..."
               rows={4}
             />
