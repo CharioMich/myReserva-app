@@ -18,7 +18,7 @@ filtered by the selected date.
 # <u> Technical Info </u>
 
 - ## Forms
-  Project's forms were implemented with states and simple Flowbite components
+  Project's forms were implemented with states, zod validation and simple Flowbite components
   to demonstrate understanding of form handling and validation.
   The best alternative for a cleaner outcome would be a React Hook Form.
 
