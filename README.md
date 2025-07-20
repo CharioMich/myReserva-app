@@ -15,6 +15,21 @@ filtered by the selected date.
 
 ---
 
+# <u> Run Instructions </u> 
+Before anything else, make sure you have already cloned and set up the backend/api part. link: https://github.com/CharioMich/my-reserva-api <br>
+
+To run the app:
+- Clone the repo:
+  ``` git clone git@github.com:CharioMich/myReserva-app.git ``` (SSH)
+- In the root directory, in a terminal run ``` npm install ```
+- In the root directory (where src lives), create a .env file ``` touch .env ```
+- Inside the .env file copy-paste this: ``` VITE_API_URL=http://localhost:3000/api ``` to run the app with the 'my-reserva-api'. If you set the api's port to run on any other than 3000, set the port in the link accordingly.
+- In a different terminal start the backend
+- Run ``` npm run dev ``` or simply ``` vite ```
+- Expected terminal outcome: <br>
+  ![Terminal Screenshot](./public/terminal-vite.png)
+
+---
 # <u> Technical Info </u>
 
 - ## Forms
