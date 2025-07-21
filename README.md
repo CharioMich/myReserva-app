@@ -72,3 +72,6 @@ To run the app:
 Calendar PNG & Favicon: https://freesvgicons.com/search?q=calendar <br>
 User SVG: https://www.svgrepo.com/ <br>
 Detective dog image (403 page): https://puns.co/
+
+---
+Spotted an issue or a bug? Feel free to open a PR or reach out at: mpampisb@gmail.com 
