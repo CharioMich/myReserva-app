@@ -20,7 +20,7 @@ export const newReservation = async (axiosPrivate: AxiosInstance, payload: Reser
 
   try {
     await axiosPrivate.post(
-      RESERVATIONS_URL + `/new`,
+      RESERVATIONS_URL,
       payload,
       {
         withCredentials: true,

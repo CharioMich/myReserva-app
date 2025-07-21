@@ -58,7 +58,7 @@ const ReservationForm = () => {
     const getReservations = async () => {
       try {
         const response = await axiosPrivate.get(
-          RESERVATIONS_URL + `/new/${date}`,
+          RESERVATIONS_URL + `/reserved/${date}`,
           {
             signal: controller.signal, // Listens for controller.abort() in the clean-up function of useEffect down on line 86
           });
