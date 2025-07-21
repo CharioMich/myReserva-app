@@ -37,6 +37,13 @@ To run the app:
   to demonstrate understanding of form handling and validation.
   The best alternative for a cleaner outcome would be a React Hook Form.
 
+- ## Security
+
+  During local development, HTTP is used for communication between the frontend and backend.
+
+  In a real-world production deployment scenario, all data would be transferred securely over HTTPS.
+  The app would be served on a domain, secured by an SSL/TLS certificate and HTTPS redirection would be enforced.
+  Since this project is intended for local development and academic use, HTTPS was not implemented.
 
 
 - ## Room for improvement...
