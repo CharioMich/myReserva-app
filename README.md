@@ -23,7 +23,7 @@ To run the app:
   ``` git clone git@github.com:CharioMich/myReserva-app.git ``` (SSH)
 - In the root directory, in a terminal run ``` npm install ```
 - In the root directory (where src lives), create a .env file ``` touch .env ```
-- Inside the .env file copy-paste this: ``` VITE_API_URL=http://localhost:3000/api ``` to run the app with the 'my-reserva-api'. If you set the api's port to run on any other than 3000, set the port in the link accordingly.
+- Inside the `.env` file copy-paste this: ``` VITE_API_URL=http://localhost:3000/api ``` to run the app with the 'my-reserva-api'. If you set the api's port to run on any other than 3000, set the port in the link accordingly.
 - In a different terminal start the backend
 - Run ``` npm run dev ``` or simply ``` vite ```
 - Expected terminal outcome: <br>
@@ -49,21 +49,21 @@ To run the app:
 - ## Room for improvement...
   ### # 1 <br>
   After the expiry of access token, if no API call with axiosPrivate instance is made (ex. fetch reservations on Dashboard page),
-  the token does not get refreshed. We could implement getCurrentUser with an axiosPrivate instance, but
+  the token does not get refreshed. We could implement `getCurrentUser` with an axiosPrivate instance, but
   since axiosPrivate (useAxiosPrivate.ts) is using useAuth under the hood, when trying to call it or inject it in  useEffect of
-  AuthProvider.tsx we get an error because no auth context has yet been initialized. Something like a chicken-and-egg problem. <br>
-  getCurrentUser signature in users.ts file, would look something like this:
+  `AuthProvider.tsx` we get an error because no auth context has yet been initialized. Something like a chicken-and-egg problem. <br>
+  getCurrentUser signature in `users.ts` file, would look something like this:
   
   ```js
   export const getCurrentUser = async (axiosPrivate: AxiosInstance) => {...}
   ```
-  We would create the axiosInstance in the AuthProvider.tsx and inject it into the getCurrentUser function, but that's 
+  We would create the axiosInstance in the `AuthProvider.tsx` and inject it into the `getCurrentUser` function, but that's 
   not possible for the reason mentioned above. 
   
   ### # 2
-  Flowbite's ``` <NavbarLink> ``` component does not support ``` as={Link} ``` prop, so we cannot use 
-  React Router for faster navigation. Implementing custom ``` <Link> ``` elements would have been an
-  alternative but due to restricted amount of time, default Flowbite's elements and ``` href ``` were used.
+  Flowbite's ` <NavbarLink> ` component does not support ` as={Link} ` prop, so we cannot use 
+  React Router for faster navigation. Implementing custom ` <Link> ` elements would have been an
+  alternative but due to restricted amount of time, default Flowbite's elements and ` href ` were used.
 
 --- 
 
