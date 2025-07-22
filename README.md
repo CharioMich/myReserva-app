@@ -30,6 +30,27 @@ To run the app:
   ![Terminal Screenshot](./public/terminal-vite.png)
 
 ---
+### 📁 Project Structure (under src)
+```
+src/
+├── api/             # API request logic (Axios instances, calling endpoints)
+├── assets/          # Static assets (images, fonts, etc.)
+├── components/      # UI components (buttons, forms, etc.)
+├── context/         # React context providers for global state
+├── hooks/           # Custom React hooks (e.g., useAuth)
+├── pages/           # Route-level components (screens/views)
+├── types/           # TypeScript type declarations and interfaces
+├── utils/           # Utility/helper functions (cookie management)
+│
+├── App.css          # Component-specific/global styles
+├── App.tsx          # Root component (typically holds layout and routes)
+├── index.css        # Global/base styles 
+├── main.tsx         # App entry point (renders <App /> to the DOM)
+└── vite-env.d.ts    # Type declarations for Vite's environment variables
+```
+
+---
+
 # <u> Technical Info </u>
 
 - ## Forms
