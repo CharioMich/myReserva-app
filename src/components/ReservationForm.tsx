@@ -63,7 +63,6 @@ const ReservationForm = () => {
             signal: controller.signal, // Listens for controller.abort() in the clean-up function of useEffect down on line 86
           });
 
-        // console.log("Response data: ", response.data);
 
         if (isMounted) {
           const updatedTimes = allHours.map(timeObj => {
