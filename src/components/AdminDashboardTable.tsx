@@ -133,6 +133,7 @@ export function AdminDashboardTable() {
           <TextModal open={openModal} onClose={onClose} text={text}/>
           <Datepicker
             onChange={handleDateChange}
+            minDate={new Date()}
             className="mb-2 font-bold"
           />
           {reservations?.length !== 0
