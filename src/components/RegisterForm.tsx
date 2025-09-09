@@ -107,8 +107,6 @@ const RegisterForm = () => {
 
     const isValid = validateForm();
 
-    console.log("Registration Values: ", values);
-
     if (isValid) {
       try {
         // API call via registerUser function
