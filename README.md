@@ -10,20 +10,41 @@ In its current state, the app provides a basic reservation UI where a user can:
 - View their current reservations 
 - Cancel reservations
 
-An admin account (defined in the backend -> \[admin whitelist\] -> admin@aueb.gr) can view all user reservations, 
+An admin (or more) account (controlled by the backend using and admin whitelist) can monitor user reservations and data, 
 filtered by the selected date.
+---
+### API 
+
+Backend (Node) Repo: https://github.com/CharioMich/my-reserva-api <br>
+
+<b>UPDATE! (13/09/2025): The app can now run with an alternative fully compatible Spring Boot REST api.</b> <br>
+
+Spring Backend Repo: https://github.com/CharioMich/my-reserva-spring-api
+
 
 ---
 
 # <u> Run Instructions </u> 
-Before anything else, make sure you have already cloned and set up the backend/api part. link: https://github.com/CharioMich/my-reserva-api <br>
+Before anything else, make sure you have already cloned and set up the backend/api part following the instructions inside the 
+corresponding repositories. 
 
 To run the app:
 - Clone the repo:
   ``` git clone git@github.com:CharioMich/myReserva-app.git ``` (SSH)
 - In the root directory, in a terminal run ``` npm install ```
 - In the root directory (where src lives), create a .env file ``` touch .env ```
-- Inside the `.env` file copy-paste this: ``` VITE_API_URL=http://localhost:3000/api ``` to run the app with the 'my-reserva-api'. If you set the api's port to run on any other than 3000, set the port in the link accordingly.
+- Inside the `.env` file copy-paste this: 
+  ```
+  VITE_API_URL=http://localhost:3000/api 
+  ``` 
+  to run the app with the Node 'my-reserva-api' 
+  or:
+  ```
+  VITE_API_URL=http://localhost:8080/api 
+  ``` 
+  to run the app with the Spring Boot api.
+
+
 - In a different terminal start the backend
 - Run ``` npm run dev ``` or simply ``` vite ```
 - Expected terminal outcome: <br>
