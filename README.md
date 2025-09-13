@@ -10,8 +10,9 @@ In its current state, the app provides a basic reservation UI where a user can:
 - View their current reservations 
 - Cancel reservations
 
-An admin (or more) account (controlled by the backend using and admin whitelist) can monitor user reservations and data, 
+Admin accounts (controlled by the backend using and admin whitelist) can monitor user reservations and data, 
 filtered by the selected date.
+
 ---
 ### API 
 
